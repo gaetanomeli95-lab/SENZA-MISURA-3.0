@@ -7,6 +7,12 @@ const HEROES = {
 };
 const HERO_SEQUENCE = [HERO, HEROES.presence, HEROES.worship, HEROES.generation, HEROES.city];
 
+// Dynamic content loaded from archived Wix pages (fallbacks provided)
+let HERO_TITLE = "Il Movimento\nSenza Misura";
+let HERO_LEDE = "Decenni di adorazione, predicazioni, missioni e formazione. Materiale liberamente condiviso — migliaia di download, centinaia di sermoni, decine di missioni documentate. Questa è la loro casa digitale, ora curata e accessibile.";
+
+let imageMapping = {}; // Wix remote URL → local path mapping
+
 const state = {
   media: [],
   query: "",
@@ -15,6 +21,9 @@ const state = {
   collection: "local-audio",
   visibleCount: 12,
   playing: null,
+  filters: { year: "all", category: "all" },
+  queue: [],
+  currentIndex: -1,
 };
 
 const sections = [
@@ -57,6 +66,8 @@ const resourceCards = [
   ["Mappa dei contenuti", "Inventario completo generato dalla preservazione digitale.", "/content-map.md"],
   ["Inventario media", "Metadati tecnici per ogni risorsa indicizzata.", "/data/media-inventory.json"],
   ["Archivio ricercabile", "File dati usato dall’Archivio Media intelligente.", "/data/media-library.json"],
+  ["Legacy: Download","Pagina di download storica contenente link a predicazioni, musica e risorse.", "http://www.senzamisura.org/senza_misura/Download.html"],
+  ["Legacy: Wix Home","Sito Wix storico con pagine ministeriali (Giubileo, CuoreAfrica, Musica).", "https://adoratore.wixsite.com/senzamisura"]
 ];
 
 const blogPosts = [
@@ -169,7 +180,13 @@ function mediaStats() {
 function nav() {
   return template(`
     <header class="nav" aria-label="Navigazione principale">
-      <a class="brand" href="#top" aria-label="Pagina iniziale Senza Misura Reborn"><span class="brand-mark"></span><span>Senza Misura</span></a>
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button id="navToggle" class="nav-toggle" aria-label="Apri menu">☰</button>
+        <a class="brand" href="#top" aria-label="Pagina iniziale Senza Misura Reborn"><span class="brand-mark"></span><span>Senza Misura</span></a>
+      </div>
+      <div class="nav-search-wrapper">
+        <input id="globalSearch" class="search nav-search" type="search" placeholder="Cerca nell'archivio: Grazia, Regno, Intercessione..." aria-label="Ricerca globale" />
+      </div>
       <nav class="nav-links">${sections.map(([id, label]) => `<a href="#${id}">${label}</a>`).join("")}</nav>
       <a class="nav-cta" href="#media">Esplora l’archivio</a>
     </header>
@@ -182,8 +199,8 @@ function hero() {
       <div class="hero-media"><img src="${HERO}" alt="Movimento Senza Misura" /></div>
       <div class="hero-content reveal">
         <p class="eyebrow">Piattaforma di memoria viva</p>
-        <h1>Il Movimento<br/>Senza Misura.</h1>
-        <p class="hero-lede">Decenni di adorazione, predicazioni, missioni, formazione e testimonianze preservati in una nuova casa digitale: curata, ricercabile, viva.</p>
+        <h1>${HERO_TITLE.split('\n').join('<br/>')}</h1>
+        <p class="hero-lede">${HERO_LEDE}</p>
         <div class="hero-actions">
           <a class="btn primary" href="#media">Entra nell’Archivio Media</a>
           <a class="btn" href="#story">Scopri la storia</a>
@@ -192,6 +209,7 @@ function hero() {
     </section>
   `);
 }
+
 
 function heroSequenceSection() {
   return template(`
@@ -209,64 +227,6 @@ function heroSequenceSection() {
   `);
 }
 
-
-function legacyTruthSection() {
-  return template(`
-    <section id="radici" class="section section-bg-adorazione reveal">
-      <div class="section-header">
-        <p class="eyebrow">Dai siti originali</p>
-        <h2 class="section-title">Qui non cè finzione. Cè memoria reale.</h2>
-        <p class="section-copy">I due siti storici contengono parole, scelte, date, missioni, corsi, canti e testimonianze. Questa piattaforma non li sostituisce: li custodisce e li rende finalmente leggibili.</p>
-      </div>
-      <div class="quote-grid">
-        ${legacyHighlights.map(([title, quote, source]) => `
-          <article class="quote-card">
-            <span class="card-index">${source}</span>
-            <h3>${title}</h3>
-            <p>${quote}</p>
-          </article>
-        `).join("")}
-      </div>
-    </section>
-  `);
-}
-function realArchiveSection() {
-  return template(`
-    <section id="eredita" class="section section-bg-gruppo reveal">
-      <div class="section-header">
-        <p class="eyebrow">Eredità concreta</p>
-        <h2 class="section-title">Fatti, non slogan.</h2>
-        <p class="section-copy">Queste informazioni arrivano dalle pagine originali: Musica, Network Italia, Giubileo, CuoreAfrica e iChurch.</p>
-      </div>
-      <div class="real-grid">
-        ${realPillars.map(([title, copy]) => `<article class="glass-card"><span class="card-index">Originale</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
-      </div>
-    </section>
-  `);
-}
-function livingCollectionsSection() {
-  return template(`
-    <section class="section reveal">
-      <div class="living-collections">
-        <article>
-          <p class="eyebrow">CuoreAfrica</p>
-          <h2>Missioni documentate dal 2008 al 2026.</h2>
-          <div class="mission-strip">${missionYears.map((year) => `<span>${year}</span>`).join("")}</div>
-        </article>
-        <article>
-          <p class="eyebrow">iChurch</p>
-          <h2>Corsi reali, serie complete, anni tracciati.</h2>
-          <div class="course-list">${courseCollections.map(([title, meta]) => `<div><strong>${title}</strong><span>${meta}</span></div>`).join("")}</div>
-        </article>
-        <article>
-          <p class="eyebrow">Musica</p>
-          <h2>Album e canti preservati.</h2>
-          <div class="course-list">${albumExamples.map(([title, year]) => `<div><strong>${title}</strong><span>${year}</span></div>`).join("")}</div>
-        </article>
-      </div>
-    </section>
-  `);
-}
 function statsSection() {
   const s = mediaStats();
   return template(`
@@ -332,7 +292,7 @@ function storySection() {
 
 function ministriesSection() {
   return template(`
-    <section id="ministries" class="section section-bg-corrado reveal">
+    <section id="ministries" class="section reveal" style="--section-bg-image: url('${REAL.corrado}')">
       <div class="section-header">
         <p class="eyebrow">Ministeri</p>
         <h2 class="section-title">Un ecosistema, non una brochure.</h2>
@@ -347,7 +307,7 @@ function ministriesSection() {
 
 function leadershipSection() {
   return template(`
-    <section id="leadership" class="section section-bg-corrado reveal">
+    <section id="leadership" class="section reveal" style="--section-bg-image: url('${REAL.corrado}')">
       <div class="section-header">
         <p class="eyebrow">Guida</p>
         <h2 class="section-title">Una voce riconoscibile. Una visione condivisa.</h2>
@@ -409,8 +369,23 @@ function timelineSection() {
 function filteredMedia() {
   const q = state.query.trim().toLowerCase();
   return state.media.filter((item) => {
-    const matchesQuery = !q || `${item.title} ${item.category} ${item.year} ${item.tags?.join(" ")}`.toLowerCase().includes(q);
-    return matchesQuery && collectionMatches(item);
+    const text = `${item.title} ${item.category} ${item.year} ${(item.tags||[]).join(" ")}`.toLowerCase();
+    const matchesQuery = !q || text.includes(q);
+    const matchesYear = state.filters.year === "all" || String(item.year) === String(state.filters.year);
+    const matchesCategory = state.filters.category === "all" || item.category === state.filters.category;
+    return matchesQuery && collectionMatches(item) && matchesYear && matchesCategory;
+  });
+}
+
+function populateFilters() {
+  const years = Array.from(new Set(state.media.map((m) => m.year).filter(Boolean))).sort();
+  const yearSelect = document.querySelector('#filterYear');
+  if (!yearSelect) return;
+  years.forEach((y) => {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    yearSelect.appendChild(opt);
   });
 }
 
@@ -444,6 +419,7 @@ function humanStatus(status) {
 function mediaCard(item) {
   const href = localMedia(item) ? item.localPath : item.sourceUrl;
   const label = localMedia(item) ? "Apri risorsa" : "Sorgente originale";
+  const idx = state.media.indexOf(item);
   return `
     <article class="media-card">
       <div>
@@ -451,7 +427,8 @@ function mediaCard(item) {
         <h3>${item.title}</h3>
         <p class="media-meta">${humanStatus(item.status)} · ${item.type}</p>
       </div>
-      ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}">Riproduci →</button>` : ""}
+      ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}">Riproduci →</button>` : ""}
+      <button class="media-link media-add-queue" data-idx="${idx}">Aggiungi alla coda</button>
       ${href && !localAudio(item) ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
       ${!href ? `<span class="media-link">Indicizzato · migrazione da completare</span>` : ""}
     </article>
@@ -484,6 +461,16 @@ function mediaCenter() {
         ${mediaCollectionSummary()}
         <div class="media-controls">
           <input class="search" id="mediaSearch" type="search" placeholder="Cerca: Grazia, Regno, Intercessione, 2014..." aria-label="Cerca nell’archivio media" />
+          <select id="filterCategory" class="select" aria-label="Filtra per categoria">
+            <option value="all">Tutte le categorie</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+            <option value="downloads">Documenti</option>
+            <option value="external-video">Video esterni</option>
+          </select>
+          <select id="filterYear" class="select" aria-label="Filtra per anno">
+            <option value="all">Tutti gli anni</option>
+          </select>
         </div>
         <p id="mediaCount" class="media-count"></p>
         <div id="mediaResults" class="media-rail" aria-live="polite"></div>
@@ -539,6 +526,22 @@ function resourcesSection() {
       </div>
       <div id="downloads" class="resource-grid">
         ${resourceCards.map(([title, copy, href]) => `<a class="glass-card resource-link" href="${href}" target="_blank"><span class="card-index">Scarica</span><h3>${title}</h3><p>${copy}</p></a>`).join("")}
+      </div>
+    </section>
+  `);
+}
+
+function downloadsSection() {
+  return template(`
+    <section id="downloads" class="section reveal">
+      <div class="section-header">
+        <p class="eyebrow">Download storici</p>
+        <h2 class="section-title">Risorse originali</h2>
+        <p class="section-copy">Link diretti al materiale storico: predicazioni, musica, libri e pagine legacy da cui è iniziata la preservazione.</p>
+      </div>
+      <div class="resource-grid">
+        <a class="glass-card resource-link" href="http://www.senzamisura.org/senza_misura/Download.html" target="_blank" rel="noreferrer"><span class="card-index">Legacy</span><h3>Pagina Download (sito storico)</h3><p>La pagina originale con link a predicazioni, musica e materiali scaricabili.</p></a>
+        <a class="glass-card resource-link" href="https://adoratore.wixsite.com/senzamisura" target="_blank" rel="noreferrer"><span class="card-index">Legacy</span><h3>Sito Wix storico</h3><p>Homepage storica e pagine ministeriali: Giubileo, CuoreAfrica, iChurch e altro.</p></a>
       </div>
     </section>
   `);
@@ -629,12 +632,19 @@ function contactSection() {
 function audioDock() {
   return template(`
     <aside class="audio-dock" id="audioDock" aria-live="polite" hidden>
-      <div>
-        <span class="card-index">In ascolto</span>
-        <strong id="audioTitle">Audio</strong>
+      <div style="display:flex;gap:1rem;align-items:center;">
+        <div style="flex:1;">
+          <span class="card-index">In ascolto</span>
+          <strong id="audioTitle">Audio</strong>
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:center;">
+          <button id="dockPrev" class="btn">⟨</button>
+          <button id="dockNext" class="btn">⟩</button>
+          <button class="dock-close" id="audioClose" aria-label="Chiudi player">×</button>
+        </div>
       </div>
       <audio id="audioPlayer" controls preload="none"></audio>
-      <button class="dock-close" id="audioClose" aria-label="Chiudi player">×</button>
+      <div id="queueList" style="margin-top:.6rem;max-height:160px;overflow:auto;"></div>
     </aside>
   `);
 }
@@ -673,6 +683,47 @@ function playAudio(src, title) {
   player.play().catch(() => {});
 }
 
+function renderQueue() {
+  const q = document.querySelector('#queueList');
+  if (!q) return;
+  q.innerHTML = state.queue.map((i, idx) => {
+    const item = state.media[i];
+    return `<div class="collection-card" data-qidx="${idx}"><strong>${item.title}</strong><div style="color:var(--muted);font-size:.9rem;">${item.year || ''} · ${humanCategory(item.category)}</div></div>`;
+  }).join('');
+}
+
+function addToQueue(index) {
+  if (typeof index !== 'number' || index < 0 || index >= state.media.length) return;
+  state.queue.push(index);
+  renderQueue();
+}
+
+function playQueueIndex(qidx) {
+  const idx = state.queue[qidx];
+  if (typeof idx !== 'number') return;
+  const item = state.media[idx];
+  if (!item) return;
+  state.currentIndex = qidx;
+  playAudio(item.localPath || item.sourceUrl, item.title);
+}
+
+function playNext() {
+  if (state.queue.length === 0) return;
+  const next = state.currentIndex + 1;
+  if (next >= state.queue.length) {
+    state.currentIndex = 0;
+  } else state.currentIndex = next;
+  playQueueIndex(state.currentIndex);
+}
+
+function playPrev() {
+  if (state.queue.length === 0) return;
+  const prev = state.currentIndex - 1;
+  if (prev < 0) state.currentIndex = state.queue.length - 1;
+  else state.currentIndex = prev;
+  playQueueIndex(state.currentIndex);
+}
+
 function wireMediaControls() {
   const search = document.querySelector("#mediaSearch");
   const more = document.querySelector("#mediaMore");
@@ -695,6 +746,11 @@ function wireMediaControls() {
     }
     const button = event.target.closest(".media-play");
     if (button) playAudio(button.dataset.src, button.dataset.title);
+    const addQ = event.target.closest('.media-add-queue');
+    if (addQ) {
+      const idx = Number(addQ.dataset.idx);
+      addToQueue(idx);
+    }
     if (event.target.closest("#audioClose")) {
       const dock = document.querySelector("#audioDock");
       const player = document.querySelector("#audioPlayer");
@@ -703,6 +759,57 @@ function wireMediaControls() {
     }
   });
   renderMediaResults();
+
+  // Mobile nav toggle and global search wiring
+  const navToggle = document.querySelector("#navToggle");
+  const header = document.querySelector(".nav");
+  const globalSearch = document.querySelector("#globalSearch");
+  const mediaSearch = document.querySelector("#mediaSearch");
+  if (navToggle && header) {
+    navToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      header.classList.toggle("open");
+    });
+    // close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".nav")) header.classList.remove("open");
+    });
+  }
+  if (globalSearch) {
+    globalSearch.addEventListener("input", (e) => {
+      const v = e.target.value;
+      state.query = v;
+      if (mediaSearch) mediaSearch.value = v;
+      state.visibleCount = 12;
+      renderMediaResults();
+    });
+  }
+  const filterCategory = document.querySelector('#filterCategory');
+  const filterYear = document.querySelector('#filterYear');
+  if (filterCategory) {
+    filterCategory.addEventListener('change', (e) => {
+      state.filters.category = e.target.value;
+      state.visibleCount = 12;
+      renderMediaResults();
+    });
+  }
+  if (filterYear) {
+    filterYear.addEventListener('change', (e) => {
+      state.filters.year = e.target.value;
+      state.visibleCount = 12;
+      renderMediaResults();
+    });
+  }
+  // dock controls
+  const dockPrev = document.querySelector('#dockPrev');
+  const dockNext = document.querySelector('#dockNext');
+  const queueList = document.querySelector('#queueList');
+  if (dockPrev) dockPrev.addEventListener('click', (e) => { e.stopPropagation(); playPrev(); });
+  if (dockNext) dockNext.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
+  if (queueList) queueList.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-qidx]');
+    if (card) playQueueIndex(Number(card.dataset.qidx));
+  });
 }
 
 function revealOnScroll() {
@@ -724,26 +831,170 @@ async function loadMedia() {
   }
 }
 
+async function loadWixContent() {
+  try {
+    console.log('[loadWixContent] Caricamento contenuti Wix');
+    const res = await fetch('/data/wix_content.json');
+    if (!res.ok) {
+      console.warn('[loadWixContent] Errore nel caricamento wix_content.json');
+      return;
+    }
+    const wix = await res.json();
+    const pages = wix.pages || {};
+
+    // pick best home candidate: explicit Home slug or the page with most content
+    const entries = Object.entries(pages || {});
+    if (!entries.length) return;
+    const slugKey = entries.find(([k]) => k.toLowerCase() === 'home' || k.toLowerCase().includes('home'))?.[0];
+    let best = slugKey ? pages[slugKey] : null;
+    if (!best) {
+      // score by available content
+      let bestScore = -1;
+      for (const [, p] of entries) {
+        const score = (p.headings?.length || 0) + (p.paragraphs?.length || 0) + (p.images?.length || 0);
+        if (score > bestScore) { best = p; bestScore = score; }
+      }
+    }
+    if (!best) return;
+
+    // helper: sanitize and filter out boilerplate and short junk
+    const sanitizeString = (s) => {
+      if (!s) return '';
+      let t = String(s).replace(/\s+/g, ' ').trim();
+      t = t.replace(/Perch[eè]/g, 'Perché');
+      t = t.replace(/Senzamisura|SenzaMisura/gi, 'Senza Misura');
+      t = t.replace(/ministeri?o/gi, 'ministero');
+      t = t.replace(/Questo sito è stato realizzato con Wix\.? Crea il tuo oggi\.?/gi, '');
+      t = t.replace(/\bWix\b/gi, '');
+      // collapse adjacent duplicate words (basic safeguard)
+      t = t.replace(/\b(\w+)(?:\W+\1\b)+/gi, '$1');
+      t = t.replace(/\s{2,}/g, ' ');
+      return t.trim();
+    };
+    const isBoiler = (t) => !t || /wix|crea il tuo|inizia|this site|pagina iniziale|Questo sito è stato realizzato con Wix/i.test(t);
+    const cleanParas = (best.paragraphs || []).map((p) => sanitizeString(p)).filter((p) => p.length > 24 && !isBoiler(p));
+    const cleanHeadings = (best.headings || []).map((h) => ({...h, text: sanitizeString(h.text || '')})).filter((h) => h.text && !isBoiler(h.text));
+
+    // choose hero title: prefer large headings then title
+    let candidate = (cleanHeadings.find((h) => /h1|h2|h3/i.test(h.tag)) || cleanHeadings[0] || {}).text || best.title || '';
+    candidate = (candidate || '').replace(/\s+/g, ' ').trim();
+    if (!candidate && best.title) candidate = best.title.replace(/\s*\|\s*/g, ' - ').trim();
+    // insert a gentle line break near center for nicer hero layout
+    if (candidate.length > 28) {
+      const mid = Math.floor(candidate.length / 2);
+      let br = candidate.lastIndexOf(' ', mid);
+      if (br === -1) br = candidate.indexOf(' ', mid);
+      if (br > 0) candidate = candidate.slice(0, br) + '<br/>' + candidate.slice(br + 1);
+    }
+    if (candidate) HERO_TITLE = sanitizeString(candidate);
+
+    // choose hero lede: meta_description preferred, else first clean paragraph
+    const meta = sanitizeString(best.meta_description || '');
+    if (meta && !isBoiler(meta)) HERO_LEDE = meta;
+    else if (cleanParas.length) HERO_LEDE = cleanParas[0];
+
+    // load image mapping and prepare images
+    try {
+      const mapRes = await fetch('/data/wix_image_mapping.json');
+      if (mapRes.ok) {
+        imageMapping = await mapRes.json();
+        console.log('[loadWixContent] Mapping immagini caricato:', Object.keys(imageMapping).length, 'voci');
+      } else {
+        console.warn('[loadWixContent] Mapping non caricato:', mapRes.status);
+      }
+    } catch (e) {
+      console.warn('[loadWixContent] Errore mapping:', e.message);
+    }
+
+    // collect unique images across pages and apply mapping to rewrite URLs
+    const allImages = [];
+    for (const [, p] of entries) {
+      (p.images || []).forEach((img) => {
+        if (img) {
+          // Apply mapping: convert Wix remote URL to local path if available
+          const localUrl = imageMapping[img] || img;
+          if (!allImages.includes(localUrl)) allImages.push(localUrl);
+        }
+      });
+    }
+
+    // map first images into REAL keys (best-effort)
+    const imgPick = (i) => allImages[i] || allImages[0] || REAL.corrado;
+    REAL.corrado = imgPick(0);
+    REAL.gruppo = imgPick(1);
+    REAL.adorazione = imgPick(2);
+    REAL.humanResources = imgPick(3) || REAL.humanResources;
+    REAL.copertina2019 = imgPick(4) || REAL.copertina2019;
+    REAL.copertina2018 = imgPick(5) || REAL.copertina2018;
+    REAL.locandina2015 = imgPick(6) || REAL.locandina2015;
+
+    // expose section background variables to CSS so styles can use Wix images with safe fallback
+    try {
+      if (typeof document !== 'undefined' && document.documentElement) {
+        const setRootBg = (name, url) => {
+          if (!url) return;
+          document.documentElement.style.setProperty(`--${name}`, `url("${url}") center / cover no-repeat`);
+        };
+        setRootBg('section-bg-adorazione', REAL.adorazione);
+        setRootBg('section-bg-gruppo', REAL.gruppo);
+        setRootBg('section-bg-corrado', REAL.corrado);
+      }
+    } catch (e) {
+      // ignore DOM errors in non-browser environments
+    }
+
+    // update legacyHighlights with cleaner snippets
+    const highlights = [];
+    (cleanHeadings.slice(0, 3)).forEach((h) => highlights.push([sanitizeString(h.text), '', 'Sito storico']));
+    (cleanParas.slice(0, 3)).forEach((p) => highlights.push([sanitizeString(p.slice(0, 120)) + (p.length > 120 ? '…' : ''), '', 'Sito storico']));
+    if (highlights.length) {
+      legacyHighlights.splice(0, Math.min(legacyHighlights.length, highlights.length), ...highlights.slice(0, legacyHighlights.length));
+    }
+
+    // update ministries descriptions from matching pages when available
+    const pagesBySlug = Object.fromEntries(entries);
+    const mapping = { Giubileo: ['giubileo', 'Giubileo'], 'Network Italia': ['network', 'network italia', 'Network'], 'CuoreAfrica': ['cuoreafrica', 'cuore africa'], 'iChurch': ['ichurch', 'iChurch'], 'Musica': ['musica'] };
+    ministries.forEach((m, idx) => {
+      const name = m[1];
+      const candidates = mapping[name] || [name.toLowerCase()];
+      for (const k of Object.keys(pagesBySlug)) {
+        const lower = k.toLowerCase();
+        if (candidates.some((c) => lower.includes(c.toLowerCase()))) {
+          const p = pagesBySlug[k];
+          const desc = (p.paragraphs || []).find((t) => t && t.length > 30 && !isBoiler(t));
+          if (desc) ministries[idx][2] = sanitizeString(desc);
+          break;
+        }
+      }
+    });
+
+  } catch (e) {
+    console.warn('loadWixContent failed', e);
+  }
+}
+
 async function init() {
+  console.log('init(): starting');
   await loadMedia();
+  console.log('init(): loadMedia completed');
+  await loadWixContent();
+  console.log('init(): loadWixContent completed, imageMapping size:', Object.keys(window.imageMapping || {}).length);
   const app = document.querySelector("#app");
   app.className = "site-shell";
   app.append(
     nav(),
     el("main", { id: "main" }, [
       hero(),
-      legacyTruthSection(),
       statsSection(),
       visionMissionSection(),
-      realArchiveSection(),
-      livingCollectionsSection(),
       storySection(),
       ministriesSection(),
       leadershipSection(),
       gallerySection(),
       timelineSection(),
       mediaCenter(),
-      resourcesSection(),
+        resourcesSection(),
+        downloadsSection(),
       eventsSection(),
       testimoniesSection(),
       blogSection(),
@@ -754,6 +1005,7 @@ async function init() {
     footer(),
   );
   wireMediaControls();
+  populateFilters();
   revealOnScroll();
 }
 

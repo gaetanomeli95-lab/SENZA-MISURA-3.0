@@ -1,98 +1,16 @@
 ﻿from pathlib import Path
 root = Path(r"E:\SENZA_MISURA_REBORN")
 app_path = root / "src" / "app.js"
-css_path = root / "src" / "styles.css"
-app = app_path.read_text(encoding="utf-8")
-css = css_path.read_text(encoding="utf-8")
-functions = r'''
-function legacyTruthSection() {
-  return template(`
-    <section id="radici" class="section reveal">
-      <div class="section-header">
-        <p class="eyebrow">Dai siti originali</p>
-        <h2 class="section-title">Qui non cè finzione. Cè memoria reale.</h2>
-        <p class="section-copy">I due siti storici contengono parole, scelte, date, missioni, corsi, canti e testimonianze. Questa piattaforma non li sostituisce: li custodisce e li rende finalmente leggibili.</p>
-      </div>
-      <div class="quote-grid">
-        ${legacyHighlights.map(([title, quote, source]) => `
-          <article class="quote-card">
-            <span class="card-index">${source}</span>
-            <h3>${title}</h3>
-            <p>${quote}</p>
-          </article>
-        `).join("")}
-      </div>
-    </section>
-  `);
-}
-function realArchiveSection() {
-  return template(`
-    <section id="eredita" class="section reveal">
-      <div class="section-header">
-        <p class="eyebrow">Eredità concreta</p>
-        <h2 class="section-title">Fatti, non slogan.</h2>
-        <p class="section-copy">Queste informazioni arrivano dalle pagine originali: Musica, Network Italia, Giubileo, CuoreAfrica e iChurch.</p>
-      </div>
-      <div class="real-grid">
-        ${realPillars.map(([title, copy]) => `<article class="glass-card"><span class="card-index">Originale</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
-      </div>
-    </section>
-  `);
-}
-function livingCollectionsSection() {
-  return template(`
-    <section class="section reveal">
-      <div class="living-collections">
-        <article>
-          <p class="eyebrow">CuoreAfrica</p>
-          <h2>Missioni documentate dal 2008 al 2026.</h2>
-          <div class="mission-strip">${missionYears.map((year) => `<span>${year}</span>`).join("")}</div>
-        </article>
-        <article>
-          <p class="eyebrow">iChurch</p>
-          <h2>Corsi reali, serie complete, anni tracciati.</h2>
-          <div class="course-list">${courseCollections.map(([title, meta]) => `<div><strong>${title}</strong><span>${meta}</span></div>`).join("")}</div>
-        </article>
-        <article>
-          <p class="eyebrow">Musica</p>
-          <h2>Album e canti preservati.</h2>
-          <div class="course-list">${albumExamples.map(([title, year]) => `<div><strong>${title}</strong><span>${year}</span></div>`).join("")}</div>
-        </article>
-      </div>
-    </section>
-  `);
-}
-function finalImageSection() {
-  return template(`
-    <section class="final-image reveal" aria-label="Senza Misura continua">
-      <img src="${HEROES.worship}" alt="Adorazione Senza Misura" loading="lazy" />
-      <div>
-        <p class="eyebrow">Continua</p>
-        <h2>La pagina non finisce nel nero. Rimane una presenza.</h2>
-      </div>
-    </section>
-  `);
-}
-'''
-if "function legacyTruthSection()" not in app:
-    app = app.replace("\nfunction statsSection() {", "\n" + functions + "\nfunction statsSection() {")
-if "legacyTruthSection()," not in app:
-    app = app.replace("      heroSequenceSection(),\n      statsSection(),", "      heroSequenceSection(),\n      legacyTruthSection(),\n      statsSection(),")
-if "realArchiveSection()," not in app:
-    app = app.replace("      visionMissionSection(),\n      storySection(),", "      visionMissionSection(),\n      realArchiveSection(),\n      livingCollectionsSection(),\n      storySection(),")
-if "finalImageSection()," not in app:
-    app = app.replace("      contactSection(),\n      donationsSection(),", "      contactSection(),\n      finalImageSection(),\n      donationsSection(),")
-css_block = r'''
-.quote-grid,
-.real-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-}
-.quote-card {
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
+"""inject_real_sections.py
+
+This script is intentionally disabled to avoid adding a separate "real" section.
+If you want to re-enable automated insertion, restore the original script logic.
+"""
+
+import sys
+
+print("inject_real_sections disabled; no changes made to app.js or styles.css")
+sys.exit(0)
   justify-content: flex-end;
   border: 1px solid rgba(244,213,141,.24);
   border-radius: calc(var(--radius) + 10px);
