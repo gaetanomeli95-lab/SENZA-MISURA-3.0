@@ -1369,7 +1369,6 @@ async function init() {
       heroSequenceSection(),
       leadershipSection(),
       bgAnchor("adorazione"),
-      gallerySection(),
       timelineSection(),
       mediaCenter(),
       resourcesSection(),
