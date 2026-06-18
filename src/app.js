@@ -1,11 +1,17 @@
-const HERO = "/media/images/heroes/hero_the_movement.png";
+const HERO = "/media/images/real/hero_corrado.png";
 const HEROES = {
   presence: "/media/images/heroes/hero_presence.png",
   worship: "/media/images/heroes/hero_worship_night.png",
   generation: "/media/images/heroes/hero_generation.png",
   city: "/media/images/heroes/hero_light_in_the_city.png",
 };
-const HERO_SEQUENCE = [HERO, HEROES.presence, HEROES.worship, HEROES.generation, HEROES.city];
+const HERO_SEQUENCE = [
+  [HEROES.presence, "La Presenza", "Dove Gesù Cristo è il Signore e la Chiesa una famiglia."],
+  [HEROES.worship, "L'Adorazione", "Decenni di worship notturno: mani alzate, cuori aperti, presenza reale."],
+  [HEROES.generation, "La Generazione", "Fire Generation: una fiamma passata di mano in mano, dai giovani di ieri a quelli di oggi."],
+  [HEROES.city, "La Luce nella Città", "Catania, Palermo, l'Italia e oltre: una presenza che illumina il buio."],
+];
+const LOGO_SM = "";
 
 // Dynamic content loaded from archived Wix pages (fallbacks provided)
 let HERO_TITLE = "Il Movimento\nSenza Misura";
@@ -39,12 +45,42 @@ const sections = [
 ];
 
 const ministries = [
-  ["01", "Giubileo", "Comunità a Catania e Palermo: adorazione, famiglia, scuola biblica e intercessione."],
-  ["02", "Network Italia", "Una rete di comunità che condivide risorse, connessione e moltiplicazione."],
-  ["03", "CuoreAfrica", "Missioni documentate dal 2008 al 2026: presenza, servizio e continuità."],
-  ["04", "iChurch", "Formazione biblica sistematica: Spirito Santo, Regno, Beatitudini, Intercessione."],
-  ["05", "Adorazione", "Decenni di musica, adorazione spontanea, album e canti diffusi gratuitamente."],
-  ["06", "Memoria multimediale", "Archivio storico di predicazioni, audio, video, PDF e testimonianze digitali."],
+  ["01", "Giubileo", "Comunità a Catania e Palermo: adorazione, famiglia, scuola biblica e intercessione.", {
+    img: "/media/images/heroes/hero_presence.png",
+    icon: "🕊️",
+    link: "https://adoratore.wixsite.com/senzamisura/giubileo",
+    details: ["Adorazione notturna", "Scuola biblica", "Intercessione per la città", "Famiglia e comunità"],
+  }],
+  ["02", "Network Italia", "Una rete di comunità che condivide risorse, connessione e moltiplicazione.", {
+    img: "/media/images/real/gruppo_full.jpg",
+    icon: "🤝",
+    link: "https://adoratore.wixsite.com/senzamisura/network",
+    details: ["Connessione tra comunità", "Risorse condivise", "Interscambi e moltiplicazione", "Presenza nazionale"],
+  }],
+  ["03", "CuoreAfrica", "Missioni documentate dal 2008 al 2026: presenza, servizio e continuità.", {
+    img: "/media/images/real/human_full.jpg",
+    icon: "🌍",
+    link: "https://adoratore.wixsite.com/senzamisura/cuoreafrica",
+    details: ["15 missioni documentate", "Ottobre 2008 → Aprile 2026", "Gallerie fotografiche su Facebook", "Presenza, servizio, continuità"],
+  }],
+  ["04", "iChurch", "Formazione biblica sistematica: Spirito Santo, Regno, Beatitudini, Intercessione.", {
+    img: "/media/images/real/copertina_full.jpg",
+    icon: "📚",
+    link: "https://adoratore.wixsite.com/senzamisura/ichurch",
+    details: ["Conoscere lo Spirito Santo (10 parti)", "Corso Intercessori (3 parti)", "Identità-Eredità-Autorità (23 parti)", "Beatitudini, Evangelizzazione, Regno di Dio"],
+  }],
+  ["05", "Adorazione", "Decenni di musica, adorazione spontanea, album e canti diffusi gratuitamente.", {
+    img: "/media/images/real/mani_full.jpg",
+    icon: "🎵",
+    link: "https://adoratore.wixsite.com/senzamisura/musica",
+    details: ["Infuocati per Dio 2003-2019", "Quanti miracoli, Apri i miei occhi", "Gratuitamente avete ricevuto", "Streaming e download gratis"],
+  }],
+  ["06", "Memoria multimediale", "Archivio storico di predicazioni, audio, video, PDF e testimonianze digitali.", {
+    img: "/media/images/real/quanti_full.png",
+    icon: "🎬",
+    link: "http://www.senzamisura.org/senza_misura/Download.html",
+    details: ["Predicazioni 2014-2019", "Audio, video, PDF", "Oltre 80.000 download", "Archivio preservato e indicizzato"],
+  }],
 ];
 
 const timeline = [
@@ -114,15 +150,18 @@ const albumExamples = [
 ];
 
 const REAL = {
-  corrado: "/media/images/real/WhatsApp.jpeg",
-  gruppo: "/media/images/real/Gruppo che si abbraccia insieme.jpg",
-  adorazione: "/media/images/real/Mani alzate interrogative.jpg",
+  corrado: "/media/images/real/4f23b2_a443011e9b2b4b89bb3f931c804e1e05~mv2.jpg",
+  corradoHero: "/media/images/real/4f23b2_a443011e9b2b4b89bb3f931c804e1e05~mv2.jpg",
+  corradoPortrait: "/media/images/real/whatsapp_full.jpg",
+  gruppo: "/media/images/real/gruppo_full.jpg",
+  adorazione: "/media/images/real/mani_full.jpg",
   logo: "/media/images/real/Logo_verticale.png",
   logoPsd: "/media/images/real/Logo_PSD.png",
+  logoSquare: "/media/images/real/Logo_verticale.png",
   copertina2019: "/media/images/real/Copertina CD IxD2019 Fronte.jpg",
   copertina2018: "/media/images/real/Copertina CD IxD2018_02.jpg",
-  copertina: "/media/images/real/Copertina.jpg",
-  quantiMiracoli: "/media/images/real/Quanti_miracoli.png",
+  copertina: "/media/images/real/copertina_full.jpg",
+  quantiMiracoli: "/media/images/real/quanti_full.png",
   locandina2015: "/media/images/real/Locandina IxD2015 _ sito.jpg",
   ixD2003: "/media/images/real/IxD2003.jpg",
   ixD2004: "/media/images/real/IxD2004.jpg",
@@ -131,7 +170,8 @@ const REAL = {
   ixD2008: "/media/images/real/IxD2008.jpg",
   ixD2013: "/media/images/real/IxD2013.jpg",
   shapeimage: "/media/images/real/shapeimage_5.png",
-  humanResources: "/media/images/real/Human-Resources-square.jpg",
+  humanResources: "/media/images/real/human_full.jpg",
+  wixHero: "/media/images/real/4f23b2_a443011e9b2b4b89bb3f931c804e1e05~mv2.jpg",
 };
 
 function el(tag, attrs = {}, children = []) {
@@ -149,6 +189,28 @@ function template(html) {
   const t = document.createElement("template");
   t.innerHTML = html.trim();
   return t.content.firstElementChild;
+}
+
+// Closing cinematic background — 4 narrative images cross-fading behind
+// the final sections. Pure background layer, no layout impact.
+function closingBackground() {
+  return template(`
+    <div class="closing-bg" aria-hidden="true">
+      <div class="closing-bg-layer" data-bg="adorazione"></div>
+      <div class="closing-bg-layer" data-bg="bibbia"></div>
+      <div class="closing-bg-layer" data-bg="croce"></div>
+      <div class="closing-bg-layer" data-bg="alba"></div>
+      <div class="closing-bg-overlay"></div>
+    </div>
+  `);
+}
+
+// Zero-height anchor marker placed in the final section flow.
+// Triggers a cross-fade to its corresponding background image.
+function bgAnchor(key) {
+  return template(`
+    <div class="bg-anchor" data-bg-anchor="${key}" aria-hidden="true"></div>
+  `);
 }
 
 function formatNumber(value) {
@@ -188,7 +250,7 @@ function nav() {
         <input id="globalSearch" class="search nav-search" type="search" placeholder="Cerca nell'archivio: Grazia, Regno, Intercessione..." aria-label="Ricerca globale" />
       </div>
       <nav class="nav-links">${sections.map(([id, label]) => `<a href="#${id}">${label}</a>`).join("")}</nav>
-      <a class="nav-cta" href="#media">Esplora l’archivio</a>
+      <a class="nav-cta" href="#media">▶ Ascolta</a>
     </header>
   `);
 }
@@ -196,16 +258,51 @@ function nav() {
 function hero() {
   return template(`
     <section id="top" class="hero">
-      <div class="hero-media"><img src="${HERO}" alt="Movimento Senza Misura" /></div>
+      <div class="hero-media"><img src="${HERO}" alt="Corrado Salmé che canta e adora" /></div>
+      <div class="hero-brand" aria-label="Senza Misura">SENZA<br/>MISURA</div>
       <div class="hero-content reveal">
-        <p class="eyebrow">Piattaforma di memoria viva</p>
-        <h1>${HERO_TITLE.split('\n').join('<br/>')}</h1>
-        <p class="hero-lede">${HERO_LEDE}</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#media">Entra nell’Archivio Media</a>
-          <a class="btn" href="#story">Scopri la storia</a>
+        <div class="hero-copy">
+          <p class="eyebrow">Dal 2006 · Grazia sovrabbondante</p>
+          <h1>La Grazia<br/>che trabocca.</h1>
+          <p class="hero-lede">Un movimento nato per condividere gratuitamente musica, predicazioni, formazione, missioni e testimonianze. Una memoria viva trasformata in esperienza digitale moderna.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#media">Ascolta ora</a>
+            <a class="btn" href="#ministries">Scopri i ministeri</a>
+            <a class="btn ghost" href="#donations">Sostieni la visione</a>
+          </div>
+        </div>
+        <aside class="hero-oracle" aria-label="Citazione originale Senza Misura">
+          <span class="card-index">Voce originale</span>
+          <p>“Il nostro desiderio è che visitando questo sito tu possa sperimentare la sovrabbondante Grazia di Dio.”</p>
+          <strong>Corrado Salmé</strong>
+        </aside>
+        <div class="hero-kpis" aria-label="Impatto Senza Misura">
+          <div><strong>80k+</strong><span>download nel primo mese</span></div>
+          <div><strong>200+</strong><span>risorse multimediali</span></div>
+          <div><strong>20+</strong><span>anni di memoria</span></div>
+          <div><strong>5</strong><span>ministeri integrati</span></div>
         </div>
       </div>
+    </section>
+  `);
+}
+
+function experiencePathsSection() {
+  const paths = [
+    ["Ascolta", "Musica, predicazioni e corsi già migrati in un player vivo.", "#media", "▶"],
+    ["Studia", "iChurch: Spirito Santo, Identità, Beatitudini, Regno e Intercessione.", "#media", "✦"],
+    ["Vivi", "Giubileo, Catania e Palermo: una famiglia dove Gesù Cristo è il Signore.", "#events", "⌂"],
+    ["Sostieni", "Missioni, archivio e diffusione gratuita delle risorse per una nuova generazione.", "#donations", "✚"],
+  ];
+  return template(`
+    <section class="experience-paths reveal" aria-label="Percorsi principali">
+      ${paths.map(([title, copy, href, icon]) => `
+        <a class="path-card" href="${href}">
+          <span>${icon}</span>
+          <strong>${title}</strong>
+          <p>${copy}</p>
+        </a>
+      `).join("")}
     </section>
   `);
 }
@@ -214,12 +311,14 @@ function hero() {
 function heroSequenceSection() {
   return template(`
     <section class="hero-sequence" aria-label="Sequenza visiva Senza Misura">
-      ${HERO_SEQUENCE.map((src, index) => `
+      ${HERO_SEQUENCE.map(([src, title, copy], index) => `
         <article class="sequence-panel reveal">
-          <img src="${src}" alt="Immagine narrativa Senza Misura ${index + 1}" loading="${index === 0 ? "eager" : "lazy"}" />
+          <img src="${src}" alt="${title}" loading="${index === 0 ? "eager" : "lazy"}" />
+          <div class="sequence-logo">SENZA<br/>MISURA</div>
           <div>
-            <span class="card-index">${String(index + 1).padStart(2, "0")}</span>
-            <h2>${["Il movimento", "La presenza", "L’adorazione", "La generazione", "La luce nella città"][index]}</h2>
+            <span class="card-index">${String(index + 1).padStart(2, "0")} · ${title}</span>
+            <h2>${title}</h2>
+            <p class="sequence-copy">${copy}</p>
           </div>
         </article>
       `).join("")}
@@ -246,19 +345,46 @@ function statsSection() {
   `);
 }
 
+function manifestoSection() {
+  return template(`
+    <section class="manifesto-section reveal" aria-label="Manifesto Senza Misura">
+      <div class="manifesto-mark">SM</div>
+      <div class="manifesto-copy">
+        <p class="eyebrow">Manifesto</p>
+        <h2>Niente potrà mai sostituire la potenza di una sola Parola.</h2>
+        <p>Dal sito originale emerge una visione chiara: non costruire una vetrina, ma una casa digitale dove la Grazia, la Presenza, la Parola, l’adorazione, la formazione e la missione siano accessibili gratuitamente a chiunque.</p>
+      </div>
+      <div class="manifesto-values">
+        <span>Grazia sovrabbondante</span>
+        <span>Famiglia di fede</span>
+        <span>Formazione gratuita</span>
+        <span>Missione viva</span>
+      </div>
+    </section>
+  `);
+}
+
 function visionMissionSection() {
   return template(`
     <section class="section reveal">
       <div class="split-feature">
-        <article id="vision" class="editorial-panel">
-          <p class="eyebrow">Visione</p>
-          <h2>La benedizione Senza Misura resa accessibile.</h2>
-          <p>Una piattaforma dove ogni persona può scoprire, ascoltare, studiare e incontrare una memoria viva: la Parola, la Presenza, l'adorazione e una comunità che continua a seminare.</p>
+        <article id="vision" class="editorial-panel vision-panel">
+          <img src="${REAL.adorazione}" alt="Mani alzate in adorazione: la benedizione Senza Misura" class="panel-bg" loading="lazy" />
+          <div class="panel-overlay"></div>
+          <div class="panel-content">
+            <p class="eyebrow">Visione</p>
+            <h2>La benedizione Senza Misura resa accessibile.</h2>
+            <p>Una piattaforma dove ogni persona può scoprire, ascoltare, studiare e incontrare una memoria viva: la Parola, la Presenza, l'adorazione e una comunità che continua a seminare.</p>
+          </div>
         </article>
-        <article id="mission" class="editorial-panel warm">
-          <p class="eyebrow">Missione</p>
-          <h2>Preservare tutto. Elevare tutto. Perdere niente.</h2>
-          <p>Ogni contenuto storico viene migrato, indicizzato e trasformato in esperienza: audio, video, PDF, missioni, corsi, testimonianze e archivi storici.</p>
+        <article id="mission" class="editorial-panel mission-panel">
+          <img src="${REAL.gruppo}" alt="La comunita Senza Misura: fede condivisa e servizio" class="panel-bg" loading="lazy" />
+          <div class="panel-overlay"></div>
+          <div class="panel-content">
+            <p class="eyebrow">Missione</p>
+            <h2>Preservare tutto. Elevare tutto. Perdere niente.</h2>
+            <p>Ogni contenuto storico viene migrato, indicizzato e trasformato in esperienza: audio, video, PDF, missioni, corsi, testimonianze e archivi storici.</p>
+          </div>
         </article>
       </div>
     </section>
@@ -269,20 +395,20 @@ function storySection() {
   return template(`
     <section id="story" class="section reveal">
       <div class="story-grid">
-        <article class="story-card">
-          <img src="${REAL.humanResources}" alt="Comunità Senza Misura" />
+        <article class="story-card story-card-history">
+          <img src="${HEROES.generation}" alt="Una generazione raggiunta dalla visione Senza Misura" />
           <div class="story-card-content">
             <p class="eyebrow">La nostra storia</p>
             <h2 class="story-title">Gratuitamente avete ricevuto.</h2>
             <p>Nel 2006 la visione prende forma: mettere a disposizione gratuitamente canti, prediche, insegnamenti e risorse. Una semina digitale che ha raggiunto migliaia di vite.</p>
           </div>
         </article>
-        <article class="story-card">
-          <img src="${REAL.gruppo}" alt="Gruppo Senza Misura" />
+        <article class="story-card story-card-impact">
+          <img src="${HEROES.city}" alt="Una presenza di luce nella citta" />
           <div class="story-card-content">
             <p class="eyebrow">Impatto</p>
             <h2 class="story-title">Una luce nella città.</h2>
-            <p>Catania, Palermo, Italia, Africa: locale e globale si incontrano in un'unica chiamata.</p>
+            <p>Catania, Palermo, Italia, Africa: locale e globale si incontrano in un'unica chiamata. Oltre 80.000 download nel primo mese, migliaia di testimonianze.</p>
           </div>
         </article>
       </div>
@@ -292,14 +418,30 @@ function storySection() {
 
 function ministriesSection() {
   return template(`
-    <section id="ministries" class="section reveal" style="--section-bg-image: url('${REAL.corrado}')">
+    <section id="ministries" class="section reveal">
       <div class="section-header">
         <p class="eyebrow">Ministeri</p>
         <h2 class="section-title">Un ecosistema, non una brochure.</h2>
-        <p class="section-copy">Comunità locale, network nazionale, missione internazionale, formazione online e archivio worship convergono in una piattaforma unica.</p>
+        <p class="section-copy">Un ecosistema spirituale integrato: comunità locale, rete nazionale, missione internazionale, formazione biblica, adorazione e archivio multimediale. Ogni ministero è una porta d’ingresso all’esperienza Senza Misura.</p>
       </div>
       <div class="ministry-grid">
-        ${ministries.map(([n, title, copy]) => `<article class="glass-card"><span class="card-index">${n}</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
+        ${ministries.map(([n, title, copy, info]) => `
+          <article class="ministry-card" data-ministry="${title}" tabindex="0">
+            <div class="ministry-card-img">
+              <img src="${info.img}" alt="${title}" loading="lazy" />
+              <span class="ministry-icon">${info.icon}</span>
+            </div>
+            <div class="ministry-card-body">
+              <span class="card-index">${n}</span>
+              <h3>${title}</h3>
+              <p>${copy}</p>
+              <ul class="ministry-details">
+                ${info.details.map(d => `<li>${d}</li>`).join("")}
+              </ul>
+              <a class="ministry-link" href="${info.link}" target="_blank" rel="noopener">Apri archivio originale →</a>
+            </div>
+          </article>
+        `).join("")}
       </div>
     </section>
   `);
@@ -307,18 +449,23 @@ function ministriesSection() {
 
 function leadershipSection() {
   return template(`
-    <section id="leadership" class="section reveal" style="--section-bg-image: url('${REAL.corrado}')">
-      <div class="section-header">
-        <p class="eyebrow">Guida</p>
-        <h2 class="section-title">Una voce riconoscibile. Una visione condivisa.</h2>
-        <p class="section-copy">Corrado Salmé emerge dai siti storici come fondatore, voce pastorale, musicista, insegnante e custode di una scelta radicale: offrire gratuitamente ciò che è stato ricevuto.</p>
-      </div>
-      <div class="profile-card">
-        <img src="${REAL.corrado}" alt="Corrado Salmé" />
-        <div>
-          <span class="card-index">Voce fondatrice</span>
-          <h3>Corrado Salmé</h3>
-          <p>Il ministero mantiene un tono personale, diretto e familiare. La nuova piattaforma preserva questa autenticità e la presenta con una cornice globale.</p>
+    <section id="leadership" class="section reveal">
+      <div class="leadership-wrap">
+        <div class="leadership-photo">
+          <img src="${REAL.corradoPortrait}" alt="Corrado Salmé" loading="lazy" />
+        </div>
+        <div class="leadership-info">
+          <p class="eyebrow">Guida</p>
+          <h2 class="section-title">Corrado Salmé</h2>
+          <span class="card-index">Voce fondatrice · Musicista · Insegnante</span>
+          <p class="leadership-bio">Fondatore del movimento Senza Misura. Voce pastorale, musicista e insegnante. Custode di una scelta radicale: offrire gratuitamente ciò che è stato ricevuto. Il suo ministero ha attraversato decenni di adorazione, predicazioni, formazioni bibliche e missioni, raggiungendo decine di migliaia di persone in tutto il mondo.</p>
+          <div class="leadership-roles">
+            <span class="role-tag">Fondatore</span>
+            <span class="role-tag">Musicista</span>
+            <span class="role-tag">Insegnante biblico</span>
+            <span class="role-tag">Intercessore</span>
+            <span class="role-tag">Missionario</span>
+          </div>
         </div>
       </div>
     </section>
@@ -427,10 +574,12 @@ function mediaCard(item) {
         <h3>${item.title}</h3>
         <p class="media-meta">${humanStatus(item.status)} · ${item.type}</p>
       </div>
-      ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}">Riproduci →</button>` : ""}
-      <button class="media-link media-add-queue" data-idx="${idx}">Aggiungi alla coda</button>
-      ${href && !localAudio(item) ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
-      ${!href ? `<span class="media-link">Indicizzato · migrazione da completare</span>` : ""}
+      <div class="media-card-actions">
+        ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}">▶ Riproduci</button>` : ""}
+        <button class="media-link media-add-queue" data-idx="${idx}">+ Coda</button>
+        ${href && !localAudio(item) ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
+        ${!href ? `<span class="media-link">Indicizzato</span>` : ""}
+      </div>
     </article>
   `;
 }
@@ -449,15 +598,63 @@ function mediaCollectionSummary() {
   `;
 }
 
+function mediaFeaturedItem() {
+  return state.media.find((item) => localAudio(item) && /grazia|spirito|regno|fuoco|occhi|miracoli/i.test(item.title)) || state.media.find(localAudio) || null;
+}
+
+function mediaPlaylistItems(term, limit = 5) {
+  const q = term.toLowerCase();
+  return state.media
+    .filter(localAudio)
+    .filter((item) => `${item.title} ${(item.tags || []).join(" ")} ${item.year || ""}`.toLowerCase().includes(q))
+    .slice(0, limit);
+}
+
+function playlistCard(title, copy, term, accent) {
+  const items = mediaPlaylistItems(term);
+  return `
+    <article class="playlist-card" style="--playlist-accent:${accent}">
+      <span class="card-index">Playlist</span>
+      <h3>${title}</h3>
+      <p>${copy}</p>
+      <div class="playlist-stack">
+        ${items.map((item) => {
+          const idx = state.media.indexOf(item);
+          return `<button class="playlist-track media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}"><strong>${item.title}</strong><span>${item.year || "Archivio"}</span></button>`;
+        }).join("") || `<span class="playlist-empty">Contenuti in indicizzazione</span>`}
+      </div>
+    </article>
+  `;
+}
+
 function mediaCenter() {
+  const featured = mediaFeaturedItem();
   const section = template(`
     <section id="media" class="media-center">
-      <div class="section reveal">
-        <div class="section-header">
-          <p class="eyebrow">Archivio Media</p>
-          <h2 class="section-title">Un archivio intelligente, non una lista infinita.</h2>
-          <p class="section-copy">Scegli un percorso, cerca una parola, ascolta subito ciò che è già migrato. Le risorse non ancora locali restano tracciate senza appesantire l’esperienza.</p>
+      <div class="section reveal media-platform">
+        <div class="media-hero-card">
+          <div>
+            <p class="eyebrow">Archivio Media</p>
+            <h2 class="section-title">Ascolta. Studia. Ricorda. Riparti.</h2>
+            <p class="section-copy">Non una lista infinita: una piattaforma viva per attraversare musica, predicazioni, corsi iChurch, documenti e memoria storica senza perdere il filo spirituale.</p>
+            <div class="hero-actions">
+              ${featured ? `<button class="btn primary media-play" data-src="${featured.localPath}" data-title="${featured.title}" data-idx="${state.media.indexOf(featured)}">▶ Riproduci: ${featured.title}</button>` : ""}
+              <a class="btn" href="#downloads">Apri risorse storiche</a>
+            </div>
+          </div>
+          <div class="media-now-card">
+            <span class="card-index">In evidenza</span>
+            <strong>${featured ? featured.title : "Archivio in caricamento"}</strong>
+            <p>${featured ? `${featured.year || ""} · ${humanCategory(featured.category)} · ${humanStatus(featured.status)}` : "Le risorse saranno mostrate appena disponibili."}</p>
+          </div>
         </div>
+
+        <div class="playlist-grid">
+          ${playlistCard("Grazia", "Canti e predicazioni che raccontano la sovrabbondanza di Dio.", "grazia", "#f2d48a")}
+          ${playlistCard("Fuoco & Adorazione", "La memoria musicale di Infuocati per Dio e delle notti di adorazione.", "infuo", "#ff7a3a")}
+          ${playlistCard("Regno e Identità", "Percorsi formativi per crescere in autorità, eredità e visione.", "regno", "#9bd4ff")}
+        </div>
+
         ${mediaCollectionSummary()}
         <div class="media-controls">
           <input class="search" id="mediaSearch" type="search" placeholder="Cerca: Grazia, Regno, Intercessione, 2014..." aria-label="Cerca nell’archivio media" />
@@ -548,17 +745,32 @@ function downloadsSection() {
 }
 
 function eventsSection() {
+  const venues = [
+    ["Catania", "Comunità Giubileo", "Via Urania", "Domenica 18:00", "Pre-culto, comunione, adorazione e Parola. Una famiglia che celebra il Regno di Dio.", "⛪"],
+    ["Palermo", "Comunità Senza Misura", "Via Giuseppe Cirincione 64", "Domenica 10:00", "Una famiglia che celebra il Regno di Dio con gioia, fede e presenza.", "⛪"],
+    ["Intercessione", "Preghiera settimanale", "Online e in presenza", "Settimanale", "Preghiera per città, regione, nazione, autorità e missione. Il battito spirituale del ministero.", "🙏"],
+    ["Missioni", "CuoreAfrica & Network", "Italia · Africa · Mondo", "Continuativo", "Presenza, servizio e continuità missionaria dal 2008. Ogni missione è un seme di vita.", "🌍"],
+  ];
   return template(`
     <section id="events" class="section reveal">
       <div class="section-header">
-        <p class="eyebrow">Eventi</p>
+        <p class="eyebrow">Eventi & Sedi</p>
         <h2 class="section-title">La presenza ha un ritmo.</h2>
-        <p class="section-copy">Domenica, intercessione, scuola biblica, missioni, incontri di rete: il calendario futuro trasformerà appuntamenti statici in un'esperienza viva e aggiornata.</p>
+        <p class="section-copy">Domenica, intercessione, scuola biblica, missioni: non orari statici, ma porte d'ingresso per una famiglia che si riunisce nella Presenza di Dio.</p>
       </div>
-      <div class="resource-grid">
-        <article class="glass-card"><span class="card-index">Catania</span><h3>Domenica 18:00</h3><p>Comunità Giubileo · Via Urania. Pre-culto, comunione, adorazione e Parola.</p></article>
-        <article class="glass-card"><span class="card-index">Palermo</span><h3>Domenica 10:00</h3><p>Via Giuseppe Cirincione 64. Una famiglia che celebra il Regno di Dio.</p></article>
-        <article class="glass-card"><span class="card-index">Intercessione</span><h3>Settimana</h3><p>Preghiera per città, regione, nazione, autorità e missione.</p></article>
+      <div class="venue-grid">
+        ${venues.map(([city, name, addr, when, desc, icon]) => `
+          <article class="venue-card">
+            <div class="venue-icon">${icon}</div>
+            <div class="venue-body">
+              <span class="card-index">${city}</span>
+              <h3>${name}</h3>
+              <p class="venue-when">${when}</p>
+              <p class="venue-addr">${addr}</p>
+              <p class="venue-desc">${desc}</p>
+            </div>
+          </article>
+        `).join("")}
       </div>
     </section>
   `);
@@ -566,13 +778,18 @@ function eventsSection() {
 
 function testimoniesSection() {
   return template(`
-    <section class="section reveal">
+    <section class="section reveal testimony-section">
       <div class="section-header">
         <p class="eyebrow">Testimonianze</p>
         <h2 class="section-title">Dai file scaricati alle vite trasformate.</h2>
+        <p class="section-copy">Ogni risorsa gratuita è un seme. Ogni download è una vita raggiunta. Queste sono le voci che raccontano cosa significa ricevere senza misura.</p>
       </div>
       <div class="testimony-grid">
-        ${testimonials.map(([title, copy]) => `<article class="glass-card"><h3>${title}</h3><p>${copy}</p></article>`).join("")}
+        ${testimonials.map(([title, copy]) => `<article class="testimony-card"><span class="testimony-mark">“</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
+      </div>
+      <div class="testimony-quote">
+        <p>“Gratuitamente avete ricevuto, gratuitamente date.”</p>
+        <span>Matteo 10:8 · il cuore di Senza Misura</span>
       </div>
     </section>
   `);
@@ -581,14 +798,32 @@ function testimoniesSection() {
 function donationsSection() {
   return template(`
     <section id="donations" class="section reveal">
-      <div class="cta-panel">
-        <p class="eyebrow">Partecipa</p>
-        <h2>Preserva l’eredità. Alimenta il futuro.</h2>
-        <p>Sostieni la migrazione, l'archivio media, le missioni e la diffusione gratuita delle risorse. Ogni donazione è un seme che moltiplica accesso, formazione e speranza.</p>
-        <div class="cta-actions">
-          <a class="btn primary" href="https://www.paypal.me/adoratore" target="_blank" rel="noreferrer">Dona con PayPal</a>
-          <a class="btn" href="mailto:info@senzamisura.org">Contatta il ministero</a>
-          <a class="btn" href="/content-map.md" target="_blank">Apri content-map</a>
+      <div class="donation-panel">
+        <div class="donation-copy">
+          <p class="eyebrow">Partecipa</p>
+          <h2>Preserva l’eredità. Alimenta il futuro.</h2>
+          <p>Sostieni la migrazione, l'archivio media, le missioni e la diffusione gratuita delle risorse. Ogni donazione è un seme che moltiplica accesso, formazione e speranza.</p>
+        </div>
+        <div class="donation-options">
+          <a class="donation-card primary" href="https://www.paypal.me/adoratore" target="_blank" rel="noreferrer">
+            <span class="donation-icon">💳</span>
+            <strong>PayPal</strong>
+            <p>Dona subito con PayPal. Veloce, sicuro, qualsiasi importo.</p>
+          </a>
+          <a class="donation-card" href="https://wa.me/393286035200" target="_blank" rel="noreferrer">
+            <span class="donation-icon">📱</span>
+            <strong>WhatsApp</strong>
+            <p>Scrivi per info su bonifico, 5x1000 e donazioni missionarie.</p>
+          </a>
+          <a class="donation-card" href="mailto:info@senzamisura.org">
+            <span class="donation-icon">✉</span>
+            <strong>Email</strong>
+            <p>Contatta il ministero per partnership e progetti specifici.</p>
+          </a>
+        </div>
+        <div class="donation-trust">
+          <span>"Gratuitamente avete ricevuto, gratuitamente date."</span>
+          <em>Matteo 10:8</em>
         </div>
       </div>
     </section>
@@ -599,12 +834,12 @@ function blogSection() {
   return template(`
     <section id="blog" class="section reveal">
       <div class="section-header">
-        <p class="eyebrow">Blog</p>
+        <p class="eyebrow">Blog & Riflessioni</p>
         <h2 class="section-title">Racconti, non semplici aggiornamenti.</h2>
-        <p class="section-copy">La futura sezione blog dovrà raccontare la visione con ritmo editoriale: storia, dottrina, missione, testimonianze e cultura del Regno.</p>
+        <p class="section-copy">La visione raccontata con ritmo editoriale: storia, dottrina, missione, testimonianze e cultura del Regno. Presto articoli completi, per ora i temi che guideranno la narrazione.</p>
       </div>
-      <div class="resource-grid">
-        ${blogPosts.map(([title, copy]) => `<article class="glass-card"><span class="card-index">Editoriale</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
+      <div class="blog-grid">
+        ${blogPosts.map(([title, copy], i) => `<article class="blog-card"><span class="card-index">${String(i+1).padStart(2,"0")} · Editoriale</span><h3>${title}</h3><p>${copy}</p><span class="blog-read">In arrivo →</span></article>`).join("")}
       </div>
     </section>
   `);
@@ -613,17 +848,31 @@ function blogSection() {
 function contactSection() {
   return template(`
     <section id="contacts" class="section reveal">
-      <div class="split-feature">
-        <article class="editorial-panel">
-          <p class="eyebrow">Contatti</p>
+      <div class="contact-panel">
+        <div class="contact-locations">
+          <p class="eyebrow">Sedi</p>
           <h2>Una casa. Due città. Una famiglia.</h2>
-          <p><strong>Catania</strong> · Via Urania · Domenica 18:00<br/><strong>Palermo</strong> · Via Giuseppe Cirincione, 64 · Domenica 10:00</p>
-        </article>
-        <article class="editorial-panel warm">
-          <p class="eyebrow">Diretto</p>
+          <div class="contact-cities">
+            <div class="contact-city">
+              <strong>Catania</strong>
+              <span>Via Urania</span>
+              <em>Domenica 18:00</em>
+            </div>
+            <div class="contact-city">
+              <strong>Palermo</strong>
+              <span>Via Giuseppe Cirincione 64</span>
+              <em>Domenica 10:00</em>
+            </div>
+          </div>
+        </div>
+        <div class="contact-direct">
+          <p class="eyebrow">Contatti diretti</p>
           <h2>Scrivi, chiama, partecipa.</h2>
-          <p>Email: <a href="mailto:info@senzamisura.org">info@senzamisura.org</a><br/>WhatsApp: <a href="https://wa.me/393286035200" target="_blank" rel="noreferrer">328.6035200</a></p>
-        </article>
+          <div class="contact-channels">
+            <a href="mailto:info@senzamisura.org"><span>✉</span><div><strong>Email</strong><em>info@senzamisura.org</em></div></a>
+            <a href="https://wa.me/393286035200" target="_blank" rel="noreferrer"><span>📱</span><div><strong>WhatsApp</strong><em>328.6035200</em></div></a>
+          </div>
+        </div>
       </div>
     </section>
   `);
@@ -632,19 +881,27 @@ function contactSection() {
 function audioDock() {
   return template(`
     <aside class="audio-dock" id="audioDock" aria-live="polite" hidden>
-      <div style="display:flex;gap:1rem;align-items:center;">
-        <div style="flex:1;">
+      <div class="dock-header">
+        <div class="dock-info">
           <span class="card-index">In ascolto</span>
           <strong id="audioTitle">Audio</strong>
         </div>
-        <div style="display:flex;gap:.5rem;align-items:center;">
-          <button id="dockPrev" class="btn">⟨</button>
-          <button id="dockNext" class="btn">⟩</button>
+        <div class="dock-controls">
+          <button id="dockSeekBack" class="dock-btn" aria-label="Indietro 15 secondi" title="Indietro 15s">⟲15</button>
+          <button id="dockPrev" class="dock-btn" aria-label="Traccia precedente" title="Precedente">⏮</button>
+          <button id="dockPlayPause" class="dock-btn dock-play" aria-label="Play/Pausa" title="Play/Pausa">▶</button>
+          <button id="dockNext" class="dock-btn" aria-label="Traccia successiva" title="Successiva">⏭</button>
+          <button id="dockSeekFwd" class="dock-btn" aria-label="Avanti 15 secondi" title="Avanti 15s">15⟳</button>
           <button class="dock-close" id="audioClose" aria-label="Chiudi player">×</button>
         </div>
       </div>
-      <audio id="audioPlayer" controls preload="none"></audio>
-      <div id="queueList" style="margin-top:.6rem;max-height:160px;overflow:auto;"></div>
+      <div class="dock-progress">
+        <span id="dockCurrent">0:00</span>
+        <input type="range" id="dockSeek" class="dock-seek" min="0" max="100" value="0" step="0.1" aria-label="Posizione traccia" />
+        <span id="dockDuration">0:00</span>
+      </div>
+      <audio id="audioPlayer" preload="metadata"></audio>
+      <div id="queueList" class="dock-queue"></div>
     </aside>
   `);
 }
@@ -653,9 +910,26 @@ function footer() {
   return template(`
     <footer class="footer">
       <div class="footer-inner">
-        <div><strong>Senza Misura Reborn</strong><br/>Piattaforma di preservazione digitale · nessuna memoria perduta.</div>
-        <div>info@senzamisura.org · 328.6035200</div>
+        <div class="footer-brand">
+          <div class="footer-mark">SM</div>
+          <div>
+            <strong>Senza Misura</strong>
+            <p>Piattaforma di memoria viva · nessuna memoria perduta.</p>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Navigazione footer">
+          <a href="#media">Archivio</a>
+          <a href="#ministries">Ministeri</a>
+          <a href="#events">Sedi</a>
+          <a href="#donations">Donazioni</a>
+          <a href="#contacts">Contatti</a>
+        </nav>
+        <div class="footer-contact">
+          <a href="mailto:info@senzamisura.org">info@senzamisura.org</a>
+          <a href="https://wa.me/393286035200" target="_blank" rel="noreferrer">328.6035200</a>
+        </div>
       </div>
+      <div class="bg-anchor" data-bg-anchor="alba" aria-hidden="true"></div>
     </footer>
   `);
 }
@@ -676,11 +950,13 @@ function playAudio(src, title) {
   const dock = document.querySelector("#audioDock");
   const player = document.querySelector("#audioPlayer");
   const label = document.querySelector("#audioTitle");
+  const btn = document.querySelector("#dockPlayPause");
   if (!dock || !player || !label) return;
   dock.hidden = false;
   label.textContent = title;
   if (player.getAttribute("src") !== src) player.setAttribute("src", src);
   player.play().catch(() => {});
+  if (btn) btn.textContent = "⏸";
 }
 
 function renderQueue() {
@@ -722,6 +998,13 @@ function playPrev() {
   if (prev < 0) state.currentIndex = state.queue.length - 1;
   else state.currentIndex = prev;
   playQueueIndex(state.currentIndex);
+}
+
+function formatTime(seconds) {
+  if (!seconds || isNaN(seconds)) return "0:00";
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s < 10 ? "0" : ""}${s}`;
 }
 
 function wireMediaControls() {
@@ -770,7 +1053,6 @@ function wireMediaControls() {
       e.stopPropagation();
       header.classList.toggle("open");
     });
-    // close menu when clicking outside
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".nav")) header.classList.remove("open");
     });
@@ -803,9 +1085,42 @@ function wireMediaControls() {
   // dock controls
   const dockPrev = document.querySelector('#dockPrev');
   const dockNext = document.querySelector('#dockNext');
+  const dockPlayPause = document.querySelector('#dockPlayPause');
+  const dockSeekBack = document.querySelector('#dockSeekBack');
+  const dockSeekFwd = document.querySelector('#dockSeekFwd');
+  const dockSeek = document.querySelector('#dockSeek');
+  const dockCurrent = document.querySelector('#dockCurrent');
+  const dockDuration = document.querySelector('#dockDuration');
   const queueList = document.querySelector('#queueList');
+  const player = document.querySelector('#audioPlayer');
   if (dockPrev) dockPrev.addEventListener('click', (e) => { e.stopPropagation(); playPrev(); });
   if (dockNext) dockNext.addEventListener('click', (e) => { e.stopPropagation(); playNext(); });
+  if (dockSeekBack) dockSeekBack.addEventListener('click', (e) => { e.stopPropagation(); if (player) player.currentTime = Math.max(0, player.currentTime - 15); });
+  if (dockSeekFwd) dockSeekFwd.addEventListener('click', (e) => { e.stopPropagation(); if (player) player.currentTime = Math.min(player.duration || 0, player.currentTime + 15); });
+  if (dockPlayPause) dockPlayPause.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!player) return;
+    if (player.paused) { player.play().catch(() => {}); dockPlayPause.textContent = "⏸"; }
+    else { player.pause(); dockPlayPause.textContent = "▶"; }
+  });
+  if (dockSeek && player) {
+    dockSeek.addEventListener('input', (e) => {
+      if (player.duration) player.currentTime = (e.target.value / 100) * player.duration;
+    });
+    player.addEventListener('timeupdate', () => {
+      if (player.duration) {
+        dockSeek.value = (player.currentTime / player.duration) * 100;
+        if (dockCurrent) dockCurrent.textContent = formatTime(player.currentTime);
+      }
+    });
+    player.addEventListener('loadedmetadata', () => {
+      if (dockDuration) dockDuration.textContent = formatTime(player.duration);
+    });
+    player.addEventListener('ended', () => {
+      if (dockPlayPause) dockPlayPause.textContent = "▶";
+      playNext();
+    });
+  }
   if (queueList) queueList.addEventListener('click', (e) => {
     const card = e.target.closest('[data-qidx]');
     if (card) playQueueIndex(Number(card.dataset.qidx));
@@ -820,6 +1135,62 @@ function revealOnScroll() {
     });
   }, { threshold: 0.12 });
   nodes.forEach((node) => observer.observe(node));
+}
+
+// Closing background: scroll-based detection of which anchor has passed
+// the viewport center. The last anchor past center determines the active
+// background image. Cross-fades are triggered only on key change (no
+// flickering). The layer deactivates when scrolling back above the zone.
+function wireClosingBackground() {
+  const bg = document.querySelector(".closing-bg");
+  if (!bg) return;
+  const layers = {
+    adorazione: bg.querySelector('[data-bg="adorazione"]'),
+    bibbia:     bg.querySelector('[data-bg="bibbia"]'),
+    croce:      bg.querySelector('[data-bg="croce"]'),
+    alba:       bg.querySelector('[data-bg="alba"]'),
+  };
+  const anchorNodes = Array.from(document.querySelectorAll("[data-bg-anchor]"));
+  if (!anchorNodes.length) return;
+
+  let currentKey = null;
+  let rafId = null;
+
+  function update() {
+    rafId = null;
+    const center = window.innerHeight / 2;
+    const lastAnchor = anchorNodes[anchorNodes.length - 1];
+    const lastAnchorRect = lastAnchor.getBoundingClientRect();
+    const nearBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50);
+
+    let activeKey = null;
+    for (const anchor of anchorNodes) {
+      if (anchor.getBoundingClientRect().top <= center) {
+        activeKey = anchor.getAttribute("data-bg-anchor");
+      }
+    }
+
+    if (nearBottom && !activeKey && lastAnchorRect.top < window.innerHeight) {
+      activeKey = lastAnchor.getAttribute("data-bg-anchor");
+    }
+
+    bg.classList.toggle("active", activeKey !== null);
+
+    if (activeKey !== currentKey) {
+      currentKey = activeKey;
+      Object.entries(layers).forEach(([k, layer]) => {
+        if (layer) layer.classList.toggle("visible", k === activeKey);
+      });
+    }
+  }
+
+  function onScroll() {
+    if (rafId === null) rafId = requestAnimationFrame(update);
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
 }
 
 async function loadMedia() {
@@ -982,22 +1353,29 @@ async function init() {
   const app = document.querySelector("#app");
   app.className = "site-shell";
   app.append(
+    closingBackground(),
     nav(),
     el("main", { id: "main" }, [
       hero(),
+      experiencePathsSection(),
       statsSection(),
+      manifestoSection(),
       visionMissionSection(),
       storySection(),
+      heroSequenceSection(),
       ministriesSection(),
       leadershipSection(),
+      bgAnchor("adorazione"),
       gallerySection(),
       timelineSection(),
       mediaCenter(),
-        resourcesSection(),
-        downloadsSection(),
+      resourcesSection(),
+      downloadsSection(),
+      bgAnchor("bibbia"),
       eventsSection(),
       testimoniesSection(),
       blogSection(),
+      bgAnchor("croce"),
       contactSection(),
       donationsSection(),
       audioDock(),
@@ -1007,6 +1385,7 @@ async function init() {
   wireMediaControls();
   populateFilters();
   revealOnScroll();
+  wireClosingBackground();
 }
 
 init();
