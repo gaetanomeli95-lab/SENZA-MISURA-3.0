@@ -351,6 +351,8 @@ function statsSection() {
 function manifestoSection() {
   return template(`
     <section class="manifesto-section reveal" aria-label="Manifesto Senza Misura">
+      <img src="${REAL.adorazione}" alt="" class="manifesto-bg" loading="lazy" />
+      <div class="manifesto-overlay"></div>
       <div class="manifesto-mark">SM</div>
       <div class="manifesto-copy">
         <p class="eyebrow">Manifesto</p>
@@ -1360,6 +1362,7 @@ async function init() {
     nav(),
     el("main", { id: "main" }, [
       hero(),
+      experiencePathsSection(),
       statsSection(),
       manifestoSection(),
       visionMissionSection(),
