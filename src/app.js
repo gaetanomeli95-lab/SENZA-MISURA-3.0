@@ -310,18 +310,21 @@ function experiencePathsSection() {
 
 function heroSequenceSection() {
   return template(`
-    <section class="hero-sequence" aria-label="Sequenza visiva Senza Misura">
-      ${HERO_SEQUENCE.map(([src, title, copy], index) => `
-        <article class="sequence-panel reveal">
-          <img src="${src}" alt="${title}" loading="${index === 0 ? "eager" : "lazy"}" />
-          <div class="sequence-logo">SENZA<br/>MISURA</div>
-          <div>
-            <span class="card-index">${String(index + 1).padStart(2, "0")} · ${title}</span>
-            <h2>${title}</h2>
-            <p class="sequence-copy">${copy}</p>
-          </div>
-        </article>
-      `).join("")}
+    <section class="hero-sequence reveal" aria-label="Sequenza visiva Senza Misura">
+      <div class="sequence-grid">
+        ${HERO_SEQUENCE.map(([src, title, copy], index) => `
+          <article class="sequence-card reveal">
+            <div class="sequence-card-img">
+              <img src="${src}" alt="${title}" loading="${index === 0 ? "eager" : "lazy"}" />
+            </div>
+            <div class="sequence-card-body">
+              <span class="card-index">${String(index + 1).padStart(2, "0")} · ${title}</span>
+              <h3>${title}</h3>
+              <p>${copy}</p>
+            </div>
+          </article>
+        `).join("")}
+      </div>
     </section>
   `);
 }
@@ -1357,7 +1360,6 @@ async function init() {
     nav(),
     el("main", { id: "main" }, [
       hero(),
-      experiencePathsSection(),
       statsSection(),
       manifestoSection(),
       visionMissionSection(),
