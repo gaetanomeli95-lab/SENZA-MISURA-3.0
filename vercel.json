@@ -7,10 +7,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/media/(.*)", "destination": "/public/media/$1" },
-    { "source": "/data/(.*)",  "destination": "/public/data/$1" },
-    { "source": "/fonts/(.*)", "destination": "/public/fonts/$1" },
-    { "source": "/(.*)",       "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
