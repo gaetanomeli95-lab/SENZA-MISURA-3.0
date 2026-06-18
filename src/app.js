@@ -36,9 +36,7 @@ const sections = [
   ["who", "Chi siamo"],
   ["vision", "Visione"],
   ["mission", "Missione"],
-  ["story", "Storia"],
   ["leadership", "Guida"],
-  ["ministries", "Ministeri"],
   ["media", "Archivio"],
   ["events", "Eventi"],
   ["donations", "Dona"],
@@ -351,7 +349,7 @@ function statsSection() {
 function manifestoSection() {
   return template(`
     <section class="manifesto-section reveal" aria-label="Manifesto Senza Misura">
-      <img src="${REAL.adorazione}" alt="" class="manifesto-bg" loading="lazy" />
+      <img src="/media/images/backgrounds/bg_bibbia.png" alt="" class="manifesto-bg" loading="lazy" />
       <div class="manifesto-overlay"></div>
       <div class="manifesto-mark">SM</div>
       <div class="manifesto-copy">
@@ -1069,6 +1067,21 @@ function wireMediaControls() {
       if (mediaSearch) mediaSearch.value = v;
       state.visibleCount = 12;
       renderMediaResults();
+    });
+    globalSearch.addEventListener("focus", () => {
+      const mediaSection = document.querySelector("#media");
+      if (mediaSection && !globalSearch.dataset.scrolled) {
+        globalSearch.dataset.scrolled = "1";
+      }
+    });
+    globalSearch.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const mediaSection = document.querySelector("#media");
+        if (mediaSection) mediaSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        const mediaSearchInput = document.querySelector("#mediaSearch");
+        if (mediaSearchInput) mediaSearchInput.focus();
+      }
     });
   }
   const filterCategory = document.querySelector('#filterCategory');
