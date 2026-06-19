@@ -534,7 +534,7 @@ function leadershipSection() {
     ["2026", "Oggi", "Piattaforma digitale viva: archivio, formazione, adorazione."],
   ];
   return template(`
-    <section id="leadership" class="section reveal leadership-section">
+    <section id="leadership" class="reveal leadership-section">
       <div class="leadership-glow"></div>
       <div class="leadership-wrap">
         <div class="leadership-photo-col">

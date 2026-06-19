@@ -1415,6 +1415,25 @@ main { position: relative; z-index: 1; }
 .leadership-section {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  padding: clamp(4.5rem, 10vw, 8rem) 0;
+}
+.leadership-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("/media/images/backgrounds/bg_leadership.png") center bottom / cover no-repeat;
+  opacity: .4;
+  pointer-events: none;
+}
+.leadership-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, var(--bg) 0%, transparent 12%, transparent 88%, var(--bg) 100%);
+  pointer-events: none;
 }
 .leadership-glow {
   position: absolute;
@@ -1433,6 +1452,8 @@ main { position: relative; z-index: 1; }
   align-items: center;
   position: relative;
   z-index: 1;
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
 }
 .leadership-photo-col {
   position: relative;
@@ -1643,11 +1664,12 @@ main { position: relative; z-index: 1; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
-  margin-top: 3rem;
+  margin: 3rem auto 0;
   padding-top: 2.5rem;
   border-top: 1px solid rgba(244,213,141,.1);
   position: relative;
   z-index: 1;
+  width: min(var(--max), calc(100% - 2rem));
 }
 .timeline-item {
   position: relative;
