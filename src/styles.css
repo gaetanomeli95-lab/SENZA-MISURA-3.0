@@ -2142,6 +2142,65 @@ main { position: relative; z-index: 1; }
 }
 .media-card-actions .media-link:hover { background: rgba(216,177,95,.12); border-color: rgba(244,213,141,.3); }
 .media-card:hover { transform: translateY(-4px); border-color: rgba(244,213,141,.45); }
+.media-card-video { padding: 0; overflow: hidden; }
+.media-card-body { padding: 1.4rem; }
+.media-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0,0,0,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .4s cubic-bezier(.16,1,.3,1);
+}
+.media-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.4));
+  pointer-events: none;
+}
+.media-thumb-play {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(244,213,141,.9);
+  color: #0b0b0d;
+  font-size: 1.1rem;
+  transition: transform .3s ease, background .3s ease;
+}
+.media-card-video:hover .media-thumb { transform: scale(1.03); }
+.media-card-video:hover .media-thumb-play { transform: scale(1.15); background: var(--gold-2); }
+.media-card-actions { padding: 0 1.4rem 1.4rem; margin-top: 0; }
+.media-card:not(.media-card-video) .media-card-actions { padding: 0; margin-top: .8rem; }
+.media-yt {
+  background: rgba(255,0,0,.08) !important;
+  border-color: rgba(255,0,0,.2) !important;
+  color: #ff6b6b !important;
+}
+.media-yt:hover { background: rgba(255,0,0,.15) !important; border-color: rgba(255,0,0,.35) !important; }
+.media-course-tag {
+  display: inline-block;
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 700;
+  color: var(--gold-2);
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244,213,141,.2);
+  background: rgba(244,213,141,.06);
+  margin-left: .4rem;
+  vertical-align: middle;
+}
 .media-type { color: var(--gold-2); font-size: var(--step--1); letter-spacing: .18em; text-transform: uppercase; font-weight: 600; }
 .media-card h3 { margin: .7rem 0; font-family: var(--font-display); font-feature-settings: var(--ff-display); font-variation-settings: "opsz" var(--opsz-display); font-size: var(--step-1); font-weight: 500; line-height: 1.2; letter-spacing: -.01em; }
 .media-meta { color: var(--dim); font-size: var(--step--1); }

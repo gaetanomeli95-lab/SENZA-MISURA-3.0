@@ -719,9 +719,26 @@ function humanCategory(category) {
     video: "Video",
     images: "Immagine",
     downloads: "Documento",
-    "external-video": "Video da migrare",
+    "external-video": "Video",
     "external-archive": "Archivio esterno",
   }[category] || "Risorsa";
+}
+
+function youTubeThumb(url) {
+  const m = String(url || "").match(/(?:youtu\.be\/|v=)([a-zA-Z0-9_-]{11})/);
+  return m ? `https://img.youtube.com/vi/${m[1]}/mqdefault.jpg` : null;
+}
+
+function youTubeId(url) {
+  const m = String(url || "").match(/(?:youtu\.be\/|v=)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function courseTag(item) {
+  if (!item.tags) return "";
+  const course = item.tags.find((t) => t.startsWith("ichurch") || t.includes("beatitudini") || t.includes("identità") || t.includes("regno") || t.includes("evangelizzare") || t.includes("segni") || t.includes("intercessione") || t.includes("spirito-santo"));
+  if (course) return `<span class="media-course-tag">${course.replace(/-/g," ")}</span>`;
+  return "";
 }
 
 function humanStatus(status) {
@@ -735,18 +752,24 @@ function mediaCard(item) {
   const href = localMedia(item) ? item.localPath : item.sourceUrl;
   const label = localMedia(item) ? "Apri risorsa" : "Sorgente originale";
   const idx = state.media.indexOf(item);
+  const ytId = youTubeId(item.sourceUrl);
+  const thumb = ytId ? youTubeThumb(item.sourceUrl) : null;
+  const isVideo = item.category === "external-video" || item.category === "video";
   return `
-    <article class="media-card">
-      <div>
+    <article class="media-card${isVideo ? " media-card-video" : ""}">
+      ${thumb ? `<div class="media-thumb" style="background-image:url('${thumb}')"><span class="media-thumb-play">▶</span></div>` : ""}
+      <div class="media-card-body">
         <span class="media-type">${humanCategory(item.category)}${item.year ? ` · ${item.year}` : ""}</span>
+        ${courseTag(item)}
         <h3>${item.title}</h3>
         <p class="media-meta">${humanStatus(item.status)} · ${item.type}</p>
       </div>
       <div class="media-card-actions">
         ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}">▶ Riproduci</button>` : ""}
+        ${isVideo && ytId ? `<a class="media-link media-yt" href="https://www.youtube.com/watch?v=${ytId}" target="_blank" rel="noreferrer">▶ Guarda su YouTube</a>` : ""}
         <button class="media-link media-add-queue" data-idx="${idx}">+ Coda</button>
-        ${href && !localAudio(item) ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
-        ${!href ? `<span class="media-link">Indicizzato</span>` : ""}
+        ${href && !localAudio(item) && !isVideo ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
+        ${!href && !isVideo ? `<span class="media-link">Indicizzato</span>` : ""}
       </div>
     </article>
   `;
@@ -759,7 +782,7 @@ function mediaCollectionSummary() {
     <div class="collection-grid">
       <button class="collection-card active" data-collection="local-audio"><span>${formatNumber(state.media.filter(localAudio).length)}</span><strong>Ascolta ora</strong><em>Audio già migrati e riproducibili.</em></button>
       <button class="collection-card" data-collection="all-audio"><span>${formatNumber(s.audio)}</span><strong>Tutto l’audio</strong><em>Predicazioni, adorazione, corsi.</em></button>
-      <button class="collection-card" data-collection="video"><span>${formatNumber(s.video)}</span><strong>Video</strong><em>Video indicizzati e da migrare.</em></button>
+      <button class="collection-card" data-collection="video"><span>${formatNumber(s.video)}</span><strong>Video</strong><em>Predicazioni e corsi su YouTube.</em></button>
       <button class="collection-card" data-collection="documents"><span>${formatNumber(s.downloads)}</span><strong>Documenti</strong><em>PDF e risorse scaricabili.</em></button>
       <button class="collection-card" data-collection="pending"><span>${formatNumber(pending)}</span><strong>Da completare</strong><em>Niente perso: tutto tracciato.</em></button>
     </div>
