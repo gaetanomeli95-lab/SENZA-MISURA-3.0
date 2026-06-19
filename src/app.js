@@ -224,6 +224,17 @@ function localAudio(item) {
   return item.category === "audio" && localMedia(item);
 }
 
+function audioSrc(item) {
+  if (item.category === "audio") {
+    if (item.sourceUrl) return item.sourceUrl;
+    if (item.localPath) {
+      const path = item.localPath;
+      return path.startsWith("http") ? path : window.location.origin + path;
+    }
+  }
+  return null;
+}
+
 function mediaStats() {
   const counts = state.media.reduce((acc, item) => {
     acc[item.category] = (acc[item.category] || 0) + 1;
@@ -705,7 +716,7 @@ function populateFilters() {
 }
 
 function collectionMatches(item) {
-  if (state.collection === "local-audio") return localAudio(item);
+  if (state.collection === "local-audio") return item.category === "audio" && (item.sourceUrl || item.localPath);
   if (state.collection === "all-audio") return item.category === "audio";
   if (state.collection === "video") return item.category === "video" || item.category === "external-video";
   if (state.collection === "documents") return item.category === "downloads";
@@ -749,12 +760,14 @@ function humanStatus(status) {
 }
 
 function mediaCard(item) {
+  const aSrc = audioSrc(item);
   const href = localMedia(item) ? item.localPath : item.sourceUrl;
   const label = localMedia(item) ? "Apri risorsa" : "Sorgente originale";
   const idx = state.media.indexOf(item);
   const ytId = youTubeId(item.sourceUrl);
   const thumb = ytId ? youTubeThumb(item.sourceUrl) : null;
   const isVideo = item.category === "external-video" || item.category === "video";
+  const isAudio = item.category === "audio";
   return `
     <article class="media-card${isVideo ? " media-card-video" : ""}">
       ${thumb ? `<div class="media-thumb" style="background-image:url('${thumb}')"><span class="media-thumb-play">▶</span></div>` : ""}
@@ -765,11 +778,11 @@ function mediaCard(item) {
         <p class="media-meta">${humanStatus(item.status)} · ${item.type}</p>
       </div>
       <div class="media-card-actions">
-        ${localAudio(item) ? `<button class="media-link media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}">▶ Riproduci</button>` : ""}
+        ${aSrc ? `<button class="media-link media-play" data-src="${aSrc}" data-title="${item.title}" data-idx="${idx}">▶ Riproduci</button>` : ""}
         ${isVideo && ytId ? `<a class="media-link media-yt" href="https://www.youtube.com/watch?v=${ytId}" target="_blank" rel="noreferrer">▶ Guarda su YouTube</a>` : ""}
         <button class="media-link media-add-queue" data-idx="${idx}">+ Coda</button>
-        ${href && !localAudio(item) && !isVideo ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
-        ${!href && !isVideo ? `<span class="media-link">Indicizzato</span>` : ""}
+        ${href && !aSrc && !isVideo ? `<a class="media-link" href="${href}" target="_blank" rel="noreferrer">${label} →</a>` : ""}
+        ${!href && !aSrc && !isVideo ? `<span class="media-link">Indicizzato</span>` : ""}
       </div>
     </article>
   `;
@@ -780,7 +793,7 @@ function mediaCollectionSummary() {
   const pending = state.media.filter((item) => item.status.includes("pending") || item.category.startsWith("external")).length;
   return `
     <div class="collection-grid">
-      <button class="collection-card active" data-collection="local-audio"><span>${formatNumber(state.media.filter(localAudio).length)}</span><strong>Ascolta ora</strong><em>Audio già migrati e riproducibili.</em></button>
+      <button class="collection-card active" data-collection="local-audio"><span>${formatNumber(state.media.filter((i) => i.category === "audio" && (i.sourceUrl || i.localPath)).length)}</span><strong>Ascolta ora</strong><em>Predicazioni e adorazione in streaming.</em></button>
       <button class="collection-card" data-collection="all-audio"><span>${formatNumber(s.audio)}</span><strong>Tutto l’audio</strong><em>Predicazioni, adorazione, corsi.</em></button>
       <button class="collection-card" data-collection="video"><span>${formatNumber(s.video)}</span><strong>Video</strong><em>Predicazioni e corsi su YouTube.</em></button>
       <button class="collection-card" data-collection="documents"><span>${formatNumber(s.downloads)}</span><strong>Documenti</strong><em>PDF e risorse scaricabili.</em></button>
@@ -790,13 +803,13 @@ function mediaCollectionSummary() {
 }
 
 function mediaFeaturedItem() {
-  return state.media.find((item) => localAudio(item) && /grazia|spirito|regno|fuoco|occhi|miracoli/i.test(item.title)) || state.media.find(localAudio) || null;
+  return state.media.find((item) => item.category === "audio" && audioSrc(item) && /grazia|spirito|regno|fuoco|occhi|miracoli/i.test(item.title)) || state.media.find((item) => item.category === "audio" && audioSrc(item)) || null;
 }
 
 function mediaPlaylistItems(term, limit = 5) {
   const q = term.toLowerCase();
   return state.media
-    .filter(localAudio)
+    .filter((item) => item.category === "audio" && audioSrc(item))
     .filter((item) => `${item.title} ${(item.tags || []).join(" ")} ${item.year || ""}`.toLowerCase().includes(q))
     .slice(0, limit);
 }
@@ -811,7 +824,7 @@ function playlistCard(title, copy, term, accent) {
       <div class="playlist-stack">
         ${items.map((item) => {
           const idx = state.media.indexOf(item);
-          return `<button class="playlist-track media-play" data-src="${item.localPath}" data-title="${item.title}" data-idx="${idx}"><strong>${item.title}</strong><span>${item.year || "Archivio"}</span></button>`;
+          return `<button class="playlist-track media-play" data-src="${audioSrc(item)}" data-title="${item.title}" data-idx="${idx}"><strong>${item.title}</strong><span>${item.year || "Archivio"}</span></button>`;
         }).join("") || `<span class="playlist-empty">Contenuti in indicizzazione</span>`}
       </div>
     </article>
@@ -829,7 +842,7 @@ function mediaCenter() {
             <h2 class="section-title">Ascolta. Studia. Ricorda. Riparti.</h2>
             <p class="section-copy">Non una lista infinita: una piattaforma viva per attraversare musica, predicazioni, corsi iChurch, documenti e memoria storica senza perdere il filo spirituale.</p>
             <div class="hero-actions">
-              ${featured ? `<button class="btn primary media-play" data-src="${featured.localPath}" data-title="${featured.title}" data-idx="${state.media.indexOf(featured)}">▶ Riproduci: ${featured.title}</button>` : ""}
+              ${featured ? `<button class="btn primary media-play" data-src="${audioSrc(featured)}" data-title="${featured.title}" data-idx="${state.media.indexOf(featured)}">▶ Riproduci: ${featured.title}</button>` : ""}
               <a class="btn" href="#downloads">Apri risorse storiche</a>
             </div>
           </div>
@@ -1171,7 +1184,7 @@ function playQueueIndex(qidx) {
   const item = state.media[idx];
   if (!item) return;
   state.currentIndex = qidx;
-  playAudio(item.localPath || item.sourceUrl, item.title);
+  playAudio(audioSrc(item) || item.sourceUrl || item.localPath, item.title);
 }
 
 function playNext() {
