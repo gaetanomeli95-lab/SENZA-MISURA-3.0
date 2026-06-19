@@ -262,24 +262,46 @@ function hero() {
       <div class="hero-content reveal">
         <div class="hero-copy">
           <p class="eyebrow">Dal 2006 · Grazia sovrabbondante</p>
-          <h1>La Grazia<br/>che trabocca.</h1>
+          <h1>La Grazia<br/><em>che trabocca.</em></h1>
           <p class="hero-lede">Un movimento nato per condividere gratuitamente musica, predicazioni, formazione, missioni e testimonianze. Una memoria viva trasformata in esperienza digitale moderna.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="#media">Ascolta ora</a>
+            <a class="btn primary" href="#media"><span class="btn-icon">▶</span> Ascolta ora</a>
             <a class="btn" href="#ministries">Scopri i ministeri</a>
             <a class="btn ghost" href="#donations">Sostieni la visione</a>
           </div>
         </div>
         <aside class="hero-oracle" aria-label="Citazione originale Senza Misura">
-          <span class="card-index">Voce originale</span>
-          <p>“Il nostro desiderio è che visitando questo sito tu possa sperimentare la sovrabbondante Grazia di Dio.”</p>
-          <strong>Corrado Salmé</strong>
+          <div class="oracle-quote-mark">&ldquo;</div>
+          <p>Il nostro desiderio è che visitando questo sito tu possa sperimentare la sovrabbondante Grazia di Dio.</p>
+          <div class="oracle-author">
+            <span class="oracle-avatar">CS</span>
+            <div>
+              <strong>Corrado Salmé</strong>
+              <small>Fondatore · Senza Misura</small>
+            </div>
+          </div>
         </aside>
         <div class="hero-kpis" aria-label="Impatto Senza Misura">
-          <div><strong>80k+</strong><span>download nel primo mese</span></div>
-          <div><strong>200+</strong><span>risorse multimediali</span></div>
-          <div><strong>20+</strong><span>anni di memoria</span></div>
-          <div><strong>5</strong><span>ministeri integrati</span></div>
+          <div class="kpi-card">
+            <span class="kpi-icon">♪</span>
+            <strong>80k+</strong>
+            <span>download nel primo mese</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">✦</span>
+            <strong>200+</strong>
+            <span>risorse multimediali</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">⏳</span>
+            <strong>20+</strong>
+            <span>anni di memoria</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-icon">✚</span>
+            <strong>5</strong>
+            <span>ministeri integrati</span>
+          </div>
         </div>
       </div>
     </section>
