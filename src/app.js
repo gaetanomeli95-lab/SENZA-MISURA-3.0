@@ -151,7 +151,7 @@ const albumExamples = [
 const REAL = {
   corrado: "/media/images/real/4f23b2_a443011e9b2b4b89bb3f931c804e1e05~mv2.jpg",
   corradoHero: "/media/images/real/4f23b2_a443011e9b2b4b89bb3f931c804e1e05~mv2.jpg",
-  corradoPortrait: "/media/images/real/whatsapp_full.jpg",
+  corradoPortrait: "/media/images/real/corrado_guida.png",
   gruppo: "/media/images/real/gruppo_full.jpg",
   adorazione: "/media/images/real/mani_full.jpg",
   logo: "/media/images/real/Logo_verticale.png",
@@ -528,16 +528,30 @@ function ministriesSection() {
 
 function leadershipSection() {
   return template(`
-    <section id="leadership" class="section reveal">
+    <section id="leadership" class="section reveal leadership-section">
       <div class="leadership-wrap">
         <div class="leadership-photo">
           <img src="${REAL.corradoPortrait}" alt="Corrado Salmé" loading="lazy" />
+          <div class="leadership-photo-overlay"></div>
+          <div class="leadership-photo-badge">
+            <span class="badge-pulse"></span>
+            <small>Dal 2006</small>
+          </div>
         </div>
         <div class="leadership-info">
-          <p class="eyebrow">Guida</p>
-          <h2 class="section-title">Corrado Salmé</h2>
-          <span class="card-index">Voce fondatrice · Musicista · Insegnante</span>
+          <p class="eyebrow">La Guida</p>
+          <h2 class="section-title">Corrado <em>Salmé</em></h2>
+          <span class="leadership-subtitle">Voce fondatrice · Musicista · Insegnante</span>
           <p class="leadership-bio">Fondatore del movimento Senza Misura. Voce pastorale, musicista e insegnante. Custode di una scelta radicale: offrire gratuitamente ciò che è stato ricevuto. Il suo ministero ha attraversato decenni di adorazione, predicazioni, formazioni bibliche e missioni, raggiungendo decine di migliaia di persone in tutto il mondo.</p>
+          <blockquote class="leadership-quote">
+            <span class="quote-mark">&ldquo;</span>
+            Tutto ciò che abbiamo ricevuto gratuitamente, gratuitamente vogliamo donare.
+          </blockquote>
+          <div class="leadership-stats">
+            <div class="lead-stat"><strong>20+</strong><span>anni di ministero</span></div>
+            <div class="lead-stat"><strong>80k+</strong><span>download globali</span></div>
+            <div class="lead-stat"><strong>5</strong><span>ministeri attivi</span></div>
+          </div>
           <div class="leadership-roles">
             <span class="role-tag">Fondatore</span>
             <span class="role-tag">Musicista</span>
