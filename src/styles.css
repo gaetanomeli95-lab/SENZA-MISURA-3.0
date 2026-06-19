@@ -585,7 +585,11 @@ img { max-width: 100%; display: block; }
   transform: translateX(0);
 }
 @media (max-width: 640px) {
-  .sequence-card { min-height: 320px; }
+  .sequence-card { min-height: 340px; }
+  .sequence-card-img img {
+    object-fit: contain;
+    object-position: center top;
+  }
 }
 
 main { position: relative; z-index: 1; }
@@ -1074,7 +1078,7 @@ main { position: relative; z-index: 1; }
   background: linear-gradient(180deg, transparent 0%, transparent 25%, rgba(5,5,5,.7) 100%), linear-gradient(135deg, rgba(244,213,141,.08), transparent 50%);
 }
 .mission-panel .panel-overlay {
-  background: linear-gradient(180deg, transparent 0%, transparent 25%, rgba(5,5,5,.7) 100%), linear-gradient(135deg, rgba(155,212,255,.08), transparent 50%);
+  background: linear-gradient(180deg, transparent 0%, transparent 25%, rgba(5,5,5,.7) 100%), linear-gradient(135deg, rgba(107,180,232,.08), transparent 50%);
 }
 .panel-content {
   position: relative;
@@ -1092,7 +1096,7 @@ main { position: relative; z-index: 1; }
   pointer-events: none;
 }
 .vision-panel { --glow-color: rgba(244,213,141,.14); }
-.mission-panel { --glow-color: rgba(155,212,255,.12); }
+.mission-panel { --glow-color: rgba(107,180,232,.12); }
 .panel-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -1119,8 +1123,8 @@ main { position: relative; z-index: 1; }
   background: rgba(216,177,95,.14);
 }
 .mission-panel .panel-eyebrow {
-  border-color: rgba(155,212,255,.35);
-  background: rgba(155,212,255,.12);
+  border-color: rgba(107,180,232,.35);
+  background: rgba(107,180,232,.12);
   color: #6bb4e8;
 }
 .panel-content h2 {
@@ -1220,8 +1224,8 @@ main { position: relative; z-index: 1; }
   gap: .15rem;
   padding: .8rem .9rem .8rem 1rem;
   border-radius: 14px;
-  border: 1px solid rgba(155,212,255,.18);
-  background: rgba(155,212,255,.06);
+  border: 1px solid rgba(107,180,232,.18);
+  background: rgba(107,180,232,.06);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
@@ -1232,7 +1236,7 @@ main { position: relative; z-index: 1; }
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 80% 50%, rgba(155,212,255,.18), transparent 60%);
+  background: radial-gradient(circle at 80% 50%, rgba(107,180,232,.18), transparent 60%);
   opacity: 0;
   transition: opacity .35s ease;
 }
@@ -1249,9 +1253,9 @@ main { position: relative; z-index: 1; }
 }
 .panel-stats > div:hover {
   transform: translateY(-4px) scale(1.05);
-  border-color: rgba(155,212,255,.55);
-  background: rgba(155,212,255,.14);
-  box-shadow: 0 10px 28px rgba(0,0,0,.3), 0 0 20px rgba(155,212,255,.22), inset 0 1px 0 rgba(255,255,255,.06);
+  border-color: rgba(107,180,232,.55);
+  background: rgba(107,180,232,.14);
+  box-shadow: 0 10px 28px rgba(0,0,0,.3), 0 0 20px rgba(107,180,232,.22), inset 0 1px 0 rgba(255,255,255,.06);
 }
 .panel-stats > div:hover::before { opacity: 1; }
 .panel-stats > div:hover::after { opacity: 1; transform: translateX(0); }
@@ -1259,10 +1263,10 @@ main { position: relative; z-index: 1; }
   transform: translateY(-2px) scale(1.03);
 }
 .panel-stats > div:hover strong {
-  text-shadow: 0 0 12px rgba(155,212,255,.6);
+  text-shadow: 0 0 12px rgba(107,180,232,.6);
 }
 .editorial-panel:hover .panel-stats > div {
-  border-color: rgba(155,212,255,.3);
+  border-color: rgba(107,180,232,.3);
 }
 .panel-stats strong {
   font-size: .82rem;
