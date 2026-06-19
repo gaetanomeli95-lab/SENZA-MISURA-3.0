@@ -1427,6 +1427,11 @@ main { position: relative; z-index: 1; }
   opacity: .4;
   pointer-events: none;
 }
+@media (min-width: 760px) {
+  .leadership-section::before {
+    background-position: 80% bottom;
+  }
+}
 .leadership-section::after {
   content: "";
   position: absolute;
