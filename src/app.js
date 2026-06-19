@@ -527,15 +527,27 @@ function ministriesSection() {
 }
 
 function leadershipSection() {
+  const milestones = [
+    ["2006", "Inizio", "La direzione di condividere gratuitamente musica e insegnamenti."],
+    ["2008", "Missioni", "Primo viaggio missionario in Africa — CuoreAfrica nasce."],
+    ["2019", "Infuocati", "Album pubblicato, decine di migliaia di download globali."],
+    ["2026", "Oggi", "Piattaforma digitale viva: archivio, formazione, adorazione."],
+  ];
   return template(`
     <section id="leadership" class="section reveal leadership-section">
+      <div class="leadership-glow"></div>
       <div class="leadership-wrap">
-        <div class="leadership-photo">
-          <img src="${REAL.corradoPortrait}" alt="Corrado Salmé" loading="lazy" />
-          <div class="leadership-photo-overlay"></div>
+        <div class="leadership-photo-col">
+          <div class="leadership-photo-frame">
+            <div class="leadership-photo">
+              <img src="${REAL.corradoPortrait}" alt="Corrado Salmé" loading="lazy" />
+              <div class="leadership-photo-overlay"></div>
+            </div>
+            <div class="leadership-photo-accent"></div>
+          </div>
           <div class="leadership-photo-badge">
             <span class="badge-pulse"></span>
-            <small>Dal 2006</small>
+            <small>In ministero dal 2006</small>
           </div>
         </div>
         <div class="leadership-info">
@@ -546,11 +558,24 @@ function leadershipSection() {
           <blockquote class="leadership-quote">
             <span class="quote-mark">&ldquo;</span>
             Tutto ciò che abbiamo ricevuto gratuitamente, gratuitamente vogliamo donare.
+            <span class="quote-author">— Corrado Salmé</span>
           </blockquote>
           <div class="leadership-stats">
-            <div class="lead-stat"><strong>20+</strong><span>anni di ministero</span></div>
-            <div class="lead-stat"><strong>80k+</strong><span>download globali</span></div>
-            <div class="lead-stat"><strong>5</strong><span>ministeri attivi</span></div>
+            <div class="lead-stat">
+              <span class="lead-stat-icon">♪</span>
+              <strong>20+</strong>
+              <span>anni di ministero</span>
+            </div>
+            <div class="lead-stat">
+              <span class="lead-stat-icon">✦</span>
+              <strong>80k+</strong>
+              <span>download globali</span>
+            </div>
+            <div class="lead-stat">
+              <span class="lead-stat-icon">✚</span>
+              <strong>5</strong>
+              <span>ministeri attivi</span>
+            </div>
           </div>
           <div class="leadership-roles">
             <span class="role-tag">Fondatore</span>
@@ -559,7 +584,21 @@ function leadershipSection() {
             <span class="role-tag">Intercessore</span>
             <span class="role-tag">Missionario</span>
           </div>
+          <div class="leadership-cta">
+            <a class="btn primary" href="#media"><span class="btn-icon">▶</span> Ascolta i canti</a>
+            <a class="btn ghost" href="#events">Prossimi eventi</a>
+          </div>
         </div>
+      </div>
+      <div class="leadership-timeline">
+        ${milestones.map(([year, title, desc]) => `
+          <div class="timeline-item">
+            <span class="timeline-year">${year}</span>
+            <span class="timeline-dot"></span>
+            <strong class="timeline-title">${title}</strong>
+            <p class="timeline-desc">${desc}</p>
+          </div>
+        `).join("")}
       </div>
     </section>
   `);
