@@ -1429,7 +1429,7 @@ main { position: relative; z-index: 1; }
 }
 @media (min-width: 760px) {
   .leadership-section::before {
-    background-position: 80% bottom;
+    background-position: 35% bottom;
   }
 }
 .leadership-section::after {
@@ -2506,7 +2506,9 @@ main { position: relative; z-index: 1; }
   .experience-paths { grid-template-columns: repeat(4, 1fr); }
   .hero-content { grid-template-columns: 1fr auto; align-items: end; }
   .hero-kpis { grid-template-columns: repeat(4, 1fr); }
-  .leadership-wrap { grid-template-columns: .85fr 1fr; }
+  .leadership-wrap { grid-template-columns: 1fr .85fr; }
+  .leadership-photo-col { order: 2; }
+  .leadership-info { order: 1; }
   .leadership-timeline { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   .timeline-item { padding-left: 0; padding-top: 2rem; }
   .timeline-item::before {
