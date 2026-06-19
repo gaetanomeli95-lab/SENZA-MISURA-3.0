@@ -218,6 +218,17 @@ img { max-width: 100%; display: block; }
     object-position: 30% center;
     transform: scale(1);
   }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8rem;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent, var(--bg));
+    pointer-events: none;
+  }
 }
 .hero::before {
   content: "";
