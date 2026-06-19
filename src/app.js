@@ -1,4 +1,5 @@
 const HERO = "/media/images/real/hero_corrado.png";
+const HERO_MOBILE = "/media/images/heroes/hero_mobile.png";
 const HEROES = {
   presence: "/media/images/heroes/hero_presence.png",
   worship: "/media/images/heroes/hero_worship_night.png",
@@ -256,7 +257,7 @@ function nav() {
 function hero() {
   return template(`
     <section id="top" class="hero">
-      <div class="hero-media"><img src="${HERO}" alt="Corrado Salmé che canta e adora" /></div>
+      <div class="hero-media"><img id="hero-img" src="${HERO}" alt="Corrado Salmé che canta e adora" /></div>
       <div class="hero-brand" aria-label="Senza Misura">SENZA<br/>MISURA</div>
       <div class="hero-content reveal">
         <div class="hero-copy">
@@ -1445,6 +1446,11 @@ async function init() {
   populateFilters();
   revealOnScroll();
   wireClosingBackground();
+
+  if (window.matchMedia("(max-width: 759px)").matches) {
+    const heroImg = document.getElementById("hero-img");
+    if (heroImg) heroImg.src = HERO_MOBILE;
+  }
 }
 
 init();

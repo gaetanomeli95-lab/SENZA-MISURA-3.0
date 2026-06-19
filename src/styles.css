@@ -214,8 +214,8 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 759px) {
   .hero-media img {
-    object-fit: contain;
-    object-position: center top;
+    object-fit: cover;
+    object-position: center center;
     transform: scale(1);
   }
 }
