@@ -83,12 +83,12 @@ const ministries = [
 ];
 
 const timeline = [
-  ["1996", "Prime produzioni musicali preservate: Apri i miei occhi."],
-  ["2006", "Il passo di fede: tutto il materiale viene messo a disposizione gratuitamente."],
-  ["2008", "Inizia la memoria missionaria CuoreAfrica, con archivi fotografici continuativi."],
-  ["2014", "Nasce l'ecosistema iChurch: corsi, predicazioni e formazione audio/video."],
-  ["2018", "La produzione worship entra in una fase video/streaming con playlist complete."],
-  ["2026", "Senza Misura Reborn preserva l'eredità e la porta in una piattaforma globale."],
+  { year: "1996", title: "Prime produzioni", icon: "♪", accent: "#f2d48a", tag: "Musica", desc: "Apri i miei occhi — le prime registrazioni musicali preservate. Un seme che non sarà più perso." },
+  { year: "2006", title: "Il passo di fede", icon: "✦", accent: "#c9b8ff", tag: "Genesi", desc: "Tutto il materiale viene messo a disposizione gratuitamente. La gratuità diventa identità." },
+  { year: "2008", title: "CuoreAfrica", icon: "🌍", accent: "#7ee0c0", tag: "Missioni", desc: "Nasce la memoria missionaria CuoreAfrica. Archivi fotografici continuativi da ogni viaggio." },
+  { year: "2014", title: "iChurch", icon: "▣", accent: "#9bd4ff", tag: "Formazione", desc: "L'ecosistema iChurch: corsi, predicazioni e formazione audio/video strutturati per la comunità." },
+  { year: "2018", title: "Worship streaming", icon: "▶", accent: "#ff9b6b", tag: "Adorazione", desc: "La produzione worship entra nella fase video/streaming con playlist complete e accessibili." },
+  { year: "2026", title: "Reborn", icon: "✚", accent: "#f2d48a", tag: "Eredità", desc: "Senza Misura Reborn preserva l'eredità e la porta in una piattaforma globale. Una memoria viva." },
 ];
 
 const testimonials = [
@@ -654,13 +654,28 @@ function gallerySection() {
 
 function timelineSection() {
   return template(`
-    <section class="section reveal">
-      <div class="section-header">
+    <section class="section reveal timeline-section">
+      <div class="section-header timeline-header">
         <p class="eyebrow">La storia</p>
-        <h2 class="section-title">Una timeline di fedeltà.</h2>
+        <h2 class="section-title">Una timeline di <em>fedeltà.</em></h2>
+        <p class="timeline-subtitle">Trent'anni di semina, adorazione e gratuità — ogni tappa un atto di fede.</p>
       </div>
-      <div class="timeline">
-        ${timeline.map(([year, copy]) => `<div class="timeline-item"><div class="timeline-year">${year}</div><p>${copy}</p></div>`).join("")}
+      <div class="timeline-rail">
+        <div class="timeline-spine"></div>
+        ${timeline.map((m, i) => `
+          <div class="timeline-row ${i % 2 === 0 ? "left" : "right"}" style="--tl-accent:${m.accent}">
+            <div class="timeline-node">
+              <span class="timeline-node-icon">${m.icon}</span>
+              <span class="timeline-node-ring"></span>
+            </div>
+            <div class="timeline-panel">
+              <span class="timeline-tag">${m.tag}</span>
+              <span class="timeline-year">${m.year}</span>
+              <strong class="timeline-panel-title">${m.title}</strong>
+              <p class="timeline-panel-desc">${m.desc}</p>
+            </div>
+          </div>
+        `).join("")}
       </div>
     </section>
   `);
