@@ -1432,6 +1432,11 @@ main { position: relative; z-index: 1; }
     background-position: 35% bottom;
   }
 }
+@media (max-width: 759px) {
+  .leadership-section::before {
+    background: url("/media/images/backgrounds/bg_leadership_mobile.png") center bottom / cover no-repeat;
+  }
+}
 .leadership-section::after {
   content: "";
   position: absolute;
