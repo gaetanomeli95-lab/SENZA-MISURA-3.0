@@ -332,18 +332,27 @@ function experiencePathsSection() {
 
 
 function heroSequenceSection() {
+  const accents = ["#f2d48a", "#9bd4ff", "#c9b8ff", "#7ee0c0"];
+  const icons = ["✦", "♪", "🔥", "☀"];
   return template(`
     <section class="hero-sequence reveal" aria-label="Sequenza visiva Senza Misura">
+      <div class="sequence-intro">
+        <p class="eyebrow">I quattro pilastri</p>
+        <h2>Una storia viva, <em>quattro dimensioni.</em></h2>
+      </div>
       <div class="sequence-grid">
         ${HERO_SEQUENCE.map(([src, title, copy], index) => `
-          <article class="sequence-card reveal">
+          <article class="sequence-card reveal" style="--seq-accent:${accents[index] || '#f2d48a'}">
             <div class="sequence-card-img">
               <img src="${src}" alt="${title}" loading="${index === 0 ? "eager" : "lazy"}" />
+              <div class="sequence-card-overlay"></div>
             </div>
             <div class="sequence-card-body">
-              <span class="card-index">${String(index + 1).padStart(2, "0")} · ${title}</span>
+              <span class="seq-icon">${icons[index] || "✦"}</span>
+              <span class="seq-number">${String(index + 1).padStart(2, "0")}</span>
               <h3>${title}</h3>
               <p>${copy}</p>
+              <span class="seq-arrow">→</span>
             </div>
           </article>
         `).join("")}

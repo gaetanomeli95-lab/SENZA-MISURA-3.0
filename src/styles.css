@@ -456,11 +456,30 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
 }
 
-/* Hero sequence — horizontal cards (image left, text right) */
+/* Hero sequence — cinematic vertical cards */
 .hero-sequence {
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 5rem) 0;
+}
+.sequence-intro {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.sequence-intro h2 {
+  font-family: var(--font-display);
+  font-feature-settings: var(--ff-display);
+  font-variation-settings: "opsz" var(--opsz-display);
+  font-size: var(--step-5);
+  line-height: .95;
+  letter-spacing: -.04em;
+  font-weight: 500;
+  margin: .5rem 0 0;
+}
+.sequence-intro h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-2);
 }
 .sequence-grid {
   display: grid;
@@ -469,51 +488,74 @@ img { max-width: 100%; display: block; }
 }
 .sequence-card {
   position: relative;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  border: 1px solid rgba(244,213,141,.16);
-  border-radius: calc(var(--radius) + 6px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(244,213,141,.12);
+  border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  box-shadow: var(--shadow);
-  min-height: 240px;
-  transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .4s ease, box-shadow .4s ease;
+  min-height: 380px;
+  background: rgba(5,5,5,.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  transition: transform .5s cubic-bezier(.16,1,.3,1), border-color .5s ease, box-shadow .5s ease;
+  cursor: pointer;
 }
 .sequence-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(244,213,141,.42);
-  box-shadow: 0 28px 80px rgba(0,0,0,.5);
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--seq-accent, var(--gold)) 40%, transparent);
+  box-shadow: 0 24px 64px rgba(0,0,0,.4), 0 0 24px color-mix(in srgb, var(--seq-accent, var(--gold)) 12%, transparent);
 }
 .sequence-card-img {
-  position: relative;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  min-height: 240px;
 }
 .sequence-card-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(.92) contrast(1.04) brightness(.82);
+  object-position: center;
+  filter: saturate(.95) contrast(1.05) brightness(.7);
   transition: transform .6s cubic-bezier(.16,1,.3,1), filter .6s ease;
 }
 .sequence-card:hover .sequence-card-img img {
-  transform: scale(1.04);
-  filter: saturate(1) contrast(1.06) brightness(.9);
+  transform: scale(1.06);
+  filter: saturate(1.05) contrast(1.08) brightness(.8);
 }
-.sequence-card-img::after {
-  content: "";
+.sequence-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent 60%, rgba(5,7,6,.4));
+  background: linear-gradient(180deg, transparent 0%, transparent 35%, rgba(5,7,6,.85) 100%);
 }
 .sequence-card-body {
-  padding: 1.8rem;
-  display: grid;
-  gap: .5rem;
-  align-content: center;
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 1.6rem 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.seq-icon {
+  font-size: 1.4rem;
+  color: var(--seq-accent, var(--gold-2));
+  text-shadow: 0 0 16px color-mix(in srgb, var(--seq-accent, var(--gold)) 40%, transparent);
+  margin-bottom: .3rem;
+}
+.seq-number {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.3rem;
+  font-family: var(--font-display);
+  font-feature-settings: var(--ff-display);
+  font-variation-settings: "opsz" var(--opsz-display);
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(255,255,255,.08);
+  z-index: 2;
 }
 .sequence-card-body h3 {
-  margin: .3rem 0 .2rem;
+  margin: 0;
   font-family: var(--font-display);
   font-feature-settings: var(--ff-display);
   font-variation-settings: "opsz" var(--opsz-display);
@@ -521,23 +563,29 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -.03em;
+  color: #ede4d4;
 }
 .sequence-card-body p {
-  margin: 0;
-  color: var(--muted);
-  font-size: var(--step-0);
-  line-height: 1.55;
+  margin: .3rem 0 0;
+  color: rgba(245,240,230,.7);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  max-width: 340px;
+}
+.seq-arrow {
+  margin-top: .6rem;
+  font-size: .9rem;
+  color: var(--seq-accent, var(--gold-2));
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
+}
+.sequence-card:hover .seq-arrow {
+  opacity: 1;
+  transform: translateX(0);
 }
 @media (max-width: 640px) {
-  .sequence-card {
-    grid-template-columns: 1fr;
-  }
-  .sequence-card-img {
-    min-height: 180px;
-  }
-  .sequence-card-img::after {
-    background: linear-gradient(180deg, transparent 40%, rgba(5,7,6,.5));
-  }
+  .sequence-card { min-height: 320px; }
 }
 
 main { position: relative; z-index: 1; }
@@ -1073,7 +1121,7 @@ main { position: relative; z-index: 1; }
 .mission-panel .panel-eyebrow {
   border-color: rgba(155,212,255,.35);
   background: rgba(155,212,255,.12);
-  color: #9bd4ff;
+  color: #6bb4e8;
 }
 .panel-content h2 {
   font-family: var(--font-display);
@@ -1092,7 +1140,7 @@ main { position: relative; z-index: 1; }
   color: var(--gold-2);
 }
 .mission-panel .panel-content h2 em {
-  color: #9bd4ff;
+  color: #6bb4e8;
 }
 .panel-content p {
   margin: 0 0 1.2rem;
@@ -1194,7 +1242,7 @@ main { position: relative; z-index: 1; }
   bottom: .5rem;
   right: .7rem;
   font-size: .7rem;
-  color: #9bd4ff;
+  color: #6bb4e8;
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
@@ -1219,7 +1267,7 @@ main { position: relative; z-index: 1; }
 .panel-stats strong {
   font-size: .82rem;
   font-weight: 600;
-  color: #9bd4ff;
+  color: #6bb4e8;
 }
 .panel-stats span {
   font-size: .68rem;
@@ -1241,8 +1289,8 @@ main { position: relative; z-index: 1; }
   flex-shrink: 0;
 }
 .mission-pulse {
-  background: #9bd4ff;
-  box-shadow: 0 0 12px #9bd4ff;
+  background: #6bb4e8;
+  box-shadow: 0 0 12px #6bb4e8;
 }
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
