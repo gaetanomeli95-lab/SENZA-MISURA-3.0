@@ -536,10 +536,10 @@ function ministriesSection() {
 
 function leadershipSection() {
   const milestones = [
-    ["2006", "Inizio", "La direzione di condividere gratuitamente musica e insegnamenti."],
-    ["2008", "Missioni", "Primo viaggio missionario in Africa — CuoreAfrica nasce."],
-    ["2019", "Infuocati", "Album pubblicato, decine di migliaia di download globali."],
-    ["2026", "Oggi", "Piattaforma digitale viva: archivio, formazione, adorazione."],
+    { year: "2006", title: "La Scelta", icon: "✦", accent: "#f2d48a", desc: "Corrado Salmé riceve la direzione di mettere gratuitamente a disposizione canti, prediche e insegnamenti. Nasce Senza Misura.", tag: "Genesi" },
+    { year: "2008", title: "CuoreAfrica", icon: "🌍", accent: "#7ee0c0", desc: "Primo viaggio missionario documentato in Africa. CuoreAfrica diventa l'archivio missionario reale del movimento.", tag: "Missioni" },
+    { year: "2019", title: "Infuocati", icon: "🔥", accent: "#ff9b6b", desc: "Album pubblicato. Nel primo mese oltre 80.000 download da tutto il mondo. La Grazia trabocca.", tag: "Musica" },
+    { year: "2026", title: "Reborn", icon: "✚", accent: "#9bd4ff", desc: "Piattaforma digitale viva: archivio interattivo, formazione iChurch, adorazione, missioni. Una memoria che diventa esperienza.", tag: "Oggi" },
   ];
   return template(`
     <section id="leadership" class="reveal leadership-section">
@@ -598,15 +598,28 @@ function leadershipSection() {
           </div>
         </div>
       </div>
-      <div class="leadership-timeline">
-        ${milestones.map(([year, title, desc]) => `
-          <div class="timeline-item">
-            <span class="timeline-year">${year}</span>
-            <span class="timeline-dot"></span>
-            <strong class="timeline-title">${title}</strong>
-            <p class="timeline-desc">${desc}</p>
-          </div>
-        `).join("")}
+      <div class="journey">
+        <div class="journey-header">
+          <p class="eyebrow">Il cammino</p>
+          <h3>Venti anni di <em>Grazia sovrabbondante.</em></h3>
+        </div>
+        <div class="journey-track">
+          <div class="journey-line"></div>
+          ${milestones.map((m, i) => `
+            <div class="journey-card" style="--journey-accent:${m.accent}">
+              <div class="journey-node">
+                <span class="journey-node-icon">${m.icon}</span>
+                <span class="journey-node-dot"></span>
+              </div>
+              <div class="journey-card-body">
+                <span class="journey-tag">${m.tag}</span>
+                <span class="journey-year">${m.year}</span>
+                <strong class="journey-title">${m.title}</strong>
+                <p class="journey-desc">${m.desc}</p>
+              </div>
+            </div>
+          `).join("")}
+        </div>
       </div>
     </section>
   `);
