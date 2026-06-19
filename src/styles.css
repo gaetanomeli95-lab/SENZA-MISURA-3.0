@@ -472,6 +472,22 @@ img { max-width: 100%; display: block; }
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 5rem) 0;
+  position: relative;
+}
+.hero-sequence::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/media/images/backgrounds/bg_sequence_desktop.png") center bottom / cover no-repeat;
+  opacity: .15;
+  pointer-events: none;
+}
+@media (max-width: 759px) {
+  .hero-sequence::before {
+    background: url("/media/images/backgrounds/bg_sequence_mobile.png") center bottom / cover no-repeat;
+    opacity: .2;
+  }
 }
 .sequence-intro {
   text-align: center;
