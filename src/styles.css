@@ -469,8 +469,8 @@ img { max-width: 100%; display: block; }
 
 /* Hero sequence — cinematic vertical cards */
 .hero-sequence {
-  width: min(var(--max), calc(100% - 2rem));
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: clamp(3rem, 6vw, 5rem) 0;
   position: relative;
 }
@@ -488,6 +488,11 @@ img { max-width: 100%; display: block; }
     background: url("/media/images/backgrounds/bg_sequence_mobile.png") center bottom / cover no-repeat;
     opacity: .2;
   }
+}
+.sequence-intro,
+.sequence-grid {
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
 }
 .sequence-intro {
   text-align: center;
