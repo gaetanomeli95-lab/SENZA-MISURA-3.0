@@ -287,18 +287,20 @@ function hero() {
 
 function experiencePathsSection() {
   const paths = [
-    ["Ascolta", "Musica, predicazioni e corsi già migrati in un player vivo.", "#media", "▶"],
-    ["Studia", "iChurch: Spirito Santo, Identità, Beatitudini, Regno e Intercessione.", "#media", "✦"],
-    ["Vivi", "Giubileo, Catania e Palermo: una famiglia dove Gesù Cristo è il Signore.", "#events", "⌂"],
-    ["Sostieni", "Missioni, archivio e diffusione gratuita delle risorse per una nuova generazione.", "#donations", "✚"],
+    ["Ascolta", "Musica, predicazioni e corsi già migrati in un player vivo.", "#media", "▶", "#f2d48a"],
+    ["Studia", "iChurch: Spirito Santo, Identità, Beatitudini, Regno e Intercessione.", "#media", "✦", "#9bd4ff"],
+    ["Vivi", "Giubileo, Catania e Palermo: una famiglia dove Gesù Cristo è il Signore.", "#events", "⌂", "#c9b8ff"],
+    ["Sostieni", "Missioni, archivio e diffusione gratuita delle risorse per una nuova generazione.", "#donations", "✚", "#7ee0c0"],
   ];
   return template(`
     <section class="experience-paths reveal" aria-label="Percorsi principali">
-      ${paths.map(([title, copy, href, icon]) => `
-        <a class="path-card" href="${href}">
-          <span>${icon}</span>
+      ${paths.map(([title, copy, href, icon, accent], i) => `
+        <a class="path-card" href="${href}" style="--path-accent:${accent}">
+          <span class="path-index">${String(i + 1).padStart(2, "0")}</span>
+          <span class="path-icon">${icon}</span>
           <strong>${title}</strong>
           <p>${copy}</p>
+          <span class="path-arrow">→</span>
         </a>
       `).join("")}
     </section>
@@ -330,17 +332,21 @@ function heroSequenceSection() {
 function statsSection() {
   const s = mediaStats();
   return template(`
-    <section id="who" class="section reveal">
-      <div class="section-header">
-        <p class="eyebrow">Chi siamo</p>
-        <h2 class="section-title">Non un sito. Una memoria viva.</h2>
-        <p class="section-copy">Senza Misura Reborn nasce per preservare ciò che non può andare perduto: audio storici, insegnamenti, adorazione, documenti, missioni e una visione di Grazia sovrabbondante.</p>
-      </div>
-      <div class="stats">
-        <div class="stat-card"><span class="stat-number">${formatNumber(s.total)}</span><span class="stat-label">elementi media indicizzati</span></div>
-        <div class="stat-card"><span class="stat-number">${formatNumber(s.audio)}</span><span class="stat-label">audio e predicazioni</span></div>
-        <div class="stat-card"><span class="stat-number">${formatNumber(s.video)}</span><span class="stat-label">video e riferimenti</span></div>
-        <div class="stat-card"><span class="stat-number">${formatNumber(s.local)}</span><span class="stat-label">file locali migrati</span></div>
+    <section id="who" class="section reveal chi-siamo-section">
+      <img src="/media/images/backgrounds/chi_siamo.png" alt="" class="chi-siamo-bg" loading="lazy" />
+      <div class="chi-siamo-overlay"></div>
+      <div class="chi-siamo-content">
+        <div class="section-header">
+          <p class="eyebrow">Chi siamo</p>
+          <h2 class="section-title">Non un sito. Una memoria viva.</h2>
+          <p class="section-copy">Senza Misura Reborn nasce per preservare ciò che non può andare perduto: audio storici, insegnamenti, adorazione, documenti, missioni e una visione di Grazia sovrabbondante.</p>
+        </div>
+        <div class="stats">
+          <div class="stat-card"><span class="stat-number">${formatNumber(s.total)}</span><span class="stat-label">elementi media indicizzati</span></div>
+          <div class="stat-card"><span class="stat-number">${formatNumber(s.audio)}</span><span class="stat-label">audio e predicazioni</span></div>
+          <div class="stat-card"><span class="stat-number">${formatNumber(s.video)}</span><span class="stat-label">video e riferimenti</span></div>
+          <div class="stat-card"><span class="stat-number">${formatNumber(s.local)}</span><span class="stat-label">file locali migrati</span></div>
+        </div>
       </div>
     </section>
   `);
@@ -349,7 +355,7 @@ function statsSection() {
 function manifestoSection() {
   return template(`
     <section class="manifesto-section reveal" aria-label="Manifesto Senza Misura">
-      <img src="/media/images/backgrounds/bg_bibbia.png" alt="" class="manifesto-bg" loading="lazy" />
+      <img src="/media/images/backgrounds/manifesto.png" alt="" class="manifesto-bg" loading="lazy" />
       <div class="manifesto-overlay"></div>
       <div class="manifesto-mark">SM</div>
       <div class="manifesto-copy">
@@ -358,10 +364,26 @@ function manifestoSection() {
         <p>Dal sito originale emerge una visione chiara: non costruire una vetrina, ma una casa digitale dove la Grazia, la Presenza, la Parola, l’adorazione, la formazione e la missione siano accessibili gratuitamente a chiunque.</p>
       </div>
       <div class="manifesto-values">
-        <span>Grazia sovrabbondante</span>
-        <span>Famiglia di fede</span>
-        <span>Formazione gratuita</span>
-        <span>Missione viva</span>
+        <div class="value-card" style="--va:#f2d48a">
+          <span class="value-icon">✦</span>
+          <strong>Grazia sovrabbondante</strong>
+          <em>La misura di Dio supera ogni calcolo umano.</em>
+        </div>
+        <div class="value-card" style="--va:#9bd4ff">
+          <span class="value-icon">⌂</span>
+          <strong>Famiglia di fede</strong>
+          <em>Dove Gesù Cristo è il Signore e la Chiesa una famiglia.</em>
+        </div>
+        <div class="value-card" style="--va:#c9b8ff">
+          <span class="value-icon">✎</span>
+          <strong>Formazione gratuita</strong>
+          <em>Corsi, predicazioni e insegnamenti disponibili a tutti.</em>
+        </div>
+        <div class="value-card" style="--va:#7ee0c0">
+          <span class="value-icon">✚</span>
+          <strong>Missione viva</strong>
+          <em>Dal locale al globale: una presenza che illumina il buio.</em>
+        </div>
       </div>
     </section>
   `);
@@ -374,19 +396,41 @@ function visionMissionSection() {
         <article id="vision" class="editorial-panel vision-panel">
           <img src="${REAL.adorazione}" alt="Mani alzate in adorazione: la benedizione Senza Misura" class="panel-bg" loading="lazy" />
           <div class="panel-overlay"></div>
+          <div class="panel-glow"></div>
           <div class="panel-content">
-            <p class="eyebrow">Visione</p>
-            <h2>La benedizione Senza Misura resa accessibile.</h2>
-            <p>Una piattaforma dove ogni persona può scoprire, ascoltare, studiare e incontrare una memoria viva: la Parola, la Presenza, l'adorazione e una comunità che continua a seminare.</p>
+            <span class="panel-eyebrow"><span class="panel-eyebrow-icon">✦</span> Visione</span>
+            <h2>La benedizione<br/>Senza Misura<br/><em>resa accessibile.</em></h2>
+            <p>Una piattaforma dove ogni persona può scoprire, ascoltare, studiare e incontrare una memoria viva.</p>
+            <div class="panel-tags">
+              <span>La Parola</span>
+              <span>La Presenza</span>
+              <span>L'adorazione</span>
+              <span>La comunità</span>
+            </div>
+            <div class="panel-foot">
+              <span class="panel-pulse"></span>
+              <small>Una famiglia che continua a seminare</small>
+            </div>
           </div>
         </article>
         <article id="mission" class="editorial-panel mission-panel">
           <img src="${REAL.gruppo}" alt="La comunita Senza Misura: fede condivisa e servizio" class="panel-bg" loading="lazy" />
           <div class="panel-overlay"></div>
+          <div class="panel-glow"></div>
           <div class="panel-content">
-            <p class="eyebrow">Missione</p>
-            <h2>Preservare tutto. Elevare tutto. Perdere niente.</h2>
-            <p>Ogni contenuto storico viene migrato, indicizzato e trasformato in esperienza: audio, video, PDF, missioni, corsi, testimonianze e archivi storici.</p>
+            <span class="panel-eyebrow"><span class="panel-eyebrow-icon">✚</span> Missione</span>
+            <h2>Preservare tutto.<br/>Elevare tutto.<br/><em>Perdere niente.</em></h2>
+            <p>Ogni contenuto storico viene migrato, indicizzato e trasformato in esperienza.</p>
+            <div class="panel-stats">
+              <div><strong>Audio</strong><span>Predicazioni & musica</span></div>
+              <div><strong>Video</strong><span>Corsi & worship</span></div>
+              <div><strong>Documenti</strong><span>PDF & risorse</span></div>
+              <div><strong>Missioni</strong><span>Archivi & foto</span></div>
+            </div>
+            <div class="panel-foot">
+              <span class="panel-pulse mission-pulse"></span>
+              <small>Niente perso. Tutto tracciato.</small>
+            </div>
           </div>
         </article>
       </div>
@@ -1307,12 +1351,12 @@ async function loadWixContent() {
       });
     }
 
-    // map first images into REAL keys (best-effort)
+    // map first images into REAL keys (best-effort) — preserve local paths
     const imgPick = (i) => allImages[i] || allImages[0] || REAL.corrado;
     REAL.corrado = imgPick(0);
-    REAL.gruppo = imgPick(1);
-    REAL.adorazione = imgPick(2);
-    REAL.humanResources = imgPick(3) || REAL.humanResources;
+    if (!REAL.gruppo || !REAL.gruppo.startsWith("/media/")) REAL.gruppo = imgPick(1);
+    if (!REAL.adorazione || !REAL.adorazione.startsWith("/media/")) REAL.adorazione = imgPick(2);
+    if (!REAL.humanResources || !REAL.humanResources.startsWith("/media/")) REAL.humanResources = imgPick(3) || REAL.humanResources;
     REAL.copertina2019 = imgPick(4) || REAL.copertina2019;
     REAL.copertina2018 = imgPick(5) || REAL.copertina2018;
     REAL.locandina2015 = imgPick(6) || REAL.locandina2015;
