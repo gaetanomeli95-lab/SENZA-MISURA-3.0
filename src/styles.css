@@ -768,6 +768,20 @@ main { position: relative; z-index: 1; }
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.5rem 0 0;
+  background: transparent;
+  position: relative;
+}
+.experience-paths::before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3rem;
+  background: linear-gradient(180deg, transparent, rgba(15,20,18,.4));
+  pointer-events: none;
+  z-index: -1;
 }
 .path-card {
   position: relative;
@@ -777,8 +791,10 @@ main { position: relative; z-index: 1; }
   border-top: 3px solid var(--path-accent, var(--gold));
   border-radius: calc(var(--radius) + 4px);
   padding: 1.4rem 1.2rem 1.2rem;
-  background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-  box-shadow: var(--shadow);
+  background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
   overflow: hidden;
   isolation: isolate;
   min-height: 180px;
